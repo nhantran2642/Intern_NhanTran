@@ -22,11 +22,13 @@ public class DynamicLocateElements {
     private static final int ticketAmount = 2;
 
     public static void main(String[] args) {
+
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.navigate().to(railwayUrl);
 
+        // Dynamic Elements Xpath
         String railwayTab = "//div[@id='menu']//li/a/span[text()='%s']";
         String railwayButton = "//input[@value='%s']";
         String checkPriceLink = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='check price']";
@@ -34,6 +36,7 @@ public class DynamicLocateElements {
         String railwaySelect = "//select[@name='%s']";
         String bookedTicketTableCell = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
 
+        // Define specific elements base on dynamic xpath
         By tabLogin = By.xpath(String.format(railwayTab, "Login"));
         By tabTimetable = By.xpath(String.format(railwayTab, "Timetable"));
         By txtUsername = By.id("username");
@@ -67,17 +70,17 @@ public class DynamicLocateElements {
         driver.findElement(btnSoftSeatBookTicket).click();
 
         // Step 5: Choose Depart date is next week (next 7 days) and Ticket amount is 2
-        // Get the next 7 days
+            // Step 5.1: Get the next 7 days
         LocalDate currentDate = LocalDate.now();
         LocalDate nextDate = currentDate.plusDays(numberOfNextDays);
         String departDate = nextDate.format(DateTimeFormatter.ofPattern("M/d/yyyy"));
 
-        // Select the departure date is the geted date
+            // Step 5.2: Select the departure date is the geted date
         WebElement departDateDropdownList = driver.findElement(selectDepartDate);
         Select selectDate = new Select(departDateDropdownList);
         selectDate.selectByVisibleText(departDate);
 
-        //Select the ticket amount is 2
+            // Step 5.3: Select the ticket amount is 2
         WebElement ticketAmountDropdownList = driver.findElement(selectTicketAmount);
         Select selectAmount = new Select(ticketAmountDropdownList);
         selectAmount.selectByValue(String.valueOf(ticketAmount));
@@ -85,7 +88,7 @@ public class DynamicLocateElements {
         // Step 6: Click on “book ticket”
         driver.findElement(btnBookTicket).click();
 
-        //Expected: “Ticket booked successfully!” is shown with corrected ticket info
+        // Expected: “Ticket booked successfully!” is shown with corrected ticket info
         String header = driver.findElement(headerBookingSuccessfully).getText();
         String ticketDepartStationInfo = driver.findElement(tblDepartStation).getText();
         String ticketArrivalStationInfo = driver.findElement(tblArrivalStation).getText();
