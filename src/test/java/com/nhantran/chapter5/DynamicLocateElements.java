@@ -67,7 +67,6 @@ public class DynamicLocateElements {
         driver.findElement(btnSoftSeatBookTicket).click();
 
         // Step 5: Choose Depart date is next week (next 7 days) and Ticket amount is 2
-
         // Get the next 7 days
         LocalDate currentDate = LocalDate.now();
         LocalDate nextDate = currentDate.plusDays(numberOfNextDays);
