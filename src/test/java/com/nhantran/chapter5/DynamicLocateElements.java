@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class DynamicLocate {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class DynamicLocateElements {
 
     private static final String railwayUrl = "http://saferailway.somee.com";
     private static final String validUsername = "nhantran@grr.la";
@@ -15,7 +18,7 @@ public class DynamicLocate {
     private static final String departStation = "Sài Gòn";
     private static final String arrivalStation = "Đà Nẵng";
     private static final String seatType = "Soft seat";
-    private static final int nextDate = 7;
+    private static final int numberOfNextDays = 7;
     private static final int ticketAmount = 2;
 
     public static void main(String[] args) {
@@ -29,7 +32,6 @@ public class DynamicLocate {
         String checkPriceLink = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='check price']";
         String bookTicketLink = "//tr[td[text()='%s']]//a[text()='Book ticket']";
         String railwaySelect = "//select[@name='%s']";
-        String railwayOption = "//select[@name='%s']/option[@value=%d]";
         String bookedTicketTableCell = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
 
         By tabLogin = By.xpath(String.format(railwayTab, "Login"));
@@ -40,7 +42,6 @@ public class DynamicLocate {
         By linkCheckPriceSGDN = By.xpath(String.format(checkPriceLink, "Sài Gòn", "Đà Nẵng"));
         By btnSoftSeatBookTicket = By.xpath(String.format(bookTicketLink, "Soft seat"));
         By selectDepartDate = By.xpath(String.format(railwaySelect, "Date"));
-        By optionDepartDate = By.xpath(String.format(railwayOption, "Date", nextDate));
         By selectTicketAmount = By.xpath(String.format(railwaySelect, "TicketAmount"));
         By btnBookTicket = By.xpath(String.format(railwayButton, "Book ticket"));
         By headerBookingSuccessfully = By.xpath("//h1");
@@ -66,12 +67,17 @@ public class DynamicLocate {
         driver.findElement(btnSoftSeatBookTicket).click();
 
         // Step 5: Choose Depart date is next week (next 7 days) and Ticket amount is 2
+        // Get the next 7 days
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextDate = currentDate.plusDays(numberOfNextDays);
+        String departDate = nextDate.format(DateTimeFormatter.ofPattern("M/d/yyyy"));
+
+        // Select the departure date is the geted date
         WebElement departDateDropdownList = driver.findElement(selectDepartDate);
         Select selectDate = new Select(departDateDropdownList);
-        selectDate.selectByValue(String.valueOf(nextDate));
+        selectDate.selectByVisibleText(departDate);
 
-        String departDateSelected = driver.findElement(optionDepartDate).getText();
-
+        //Select the ticket amount is 2
         WebElement ticketAmountDropdownList = driver.findElement(selectTicketAmount);
         Select selectAmount = new Select(ticketAmountDropdownList);
         selectAmount.selectByValue(String.valueOf(ticketAmount));
@@ -91,7 +97,7 @@ public class DynamicLocate {
                 && ticketDepartStationInfo.equals(departStation)
                 && ticketArrivalStationInfo.equals(arrivalStation)
                 && ticketSeatTypeInfo.equals(seatType)
-                && ticketDepartDateInfo.equals(departDateSelected)
+                && ticketDepartDateInfo.equals(departDate)
                 && ticketAmountInfo.equals(String.valueOf(ticketAmount))
         ) {
             System.out.println("Passed");
