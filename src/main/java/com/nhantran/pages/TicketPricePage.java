@@ -8,7 +8,6 @@ public class TicketPricePage extends BasePage{
 
     public BookTicketPage clickBookTicketButton(String seatType) {
         DriverManager.driver.findElement(By.xpath(String.format(bookTicketButton,seatType))).click();;
-
         return new BookTicketPage();
     }
 }
