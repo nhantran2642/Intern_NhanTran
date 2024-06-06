@@ -48,11 +48,11 @@ public class DynamicLocateElements {
         By selectTicketAmount = By.xpath(String.format(railwaySelect, "TicketAmount"));
         By btnBookTicket = By.xpath(String.format(railwayButton, "Book ticket"));
         By headerBookingSuccessfully = By.xpath("//h1");
-        By tblDepartStation = By.xpath(String.format(bookedTicketTableCell, "Depart Station"));
-        By tblArrivalStation = By.xpath(String.format(bookedTicketTableCell, "Arrive Station"));
-        By tblSeatType = By.xpath(String.format(bookedTicketTableCell, "Seat Type"));
-        By tblDepartDate = By.xpath(String.format(bookedTicketTableCell, "Depart Date"));
-        By tblAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
+        By ticketInfoDepartStation = By.xpath(String.format(bookedTicketTableCell, "Depart Station"));
+        By ticketInfoArrivalStation = By.xpath(String.format(bookedTicketTableCell, "Arrive Station"));
+        By ticketInfoSeatType = By.xpath(String.format(bookedTicketTableCell, "Seat Type"));
+        By ticketInfoDepartDate = By.xpath(String.format(bookedTicketTableCell, "Depart Date"));
+        By ticketInfoAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
 
         // Step 1: Login Railway System with a valid account
         driver.findElement(tabLogin).click();
@@ -89,19 +89,12 @@ public class DynamicLocateElements {
         driver.findElement(btnBookTicket).click();
 
         // Expected: “Ticket booked successfully!” is shown with corrected ticket info
-        String header = driver.findElement(headerBookingSuccessfully).getText();
-        String ticketDepartStationInfo = driver.findElement(tblDepartStation).getText();
-        String ticketArrivalStationInfo = driver.findElement(tblArrivalStation).getText();
-        String ticketSeatTypeInfo = driver.findElement(tblSeatType).getText();
-        String ticketDepartDateInfo = driver.findElement(tblDepartDate).getText();
-        String ticketAmountInfo = driver.findElement(tblAmount).getText();
-
-        if (header.equals("Ticket booked successfully!")
-                && ticketDepartStationInfo.equals(departStation)
-                && ticketArrivalStationInfo.equals(arrivalStation)
-                && ticketSeatTypeInfo.equals(seatType)
-                && ticketDepartDateInfo.equals(departDate)
-                && ticketAmountInfo.equals(String.valueOf(ticketAmount))
+        if (driver.findElement(headerBookingSuccessfully).getText().equals("Ticket booked successfully!")
+                && driver.findElement(ticketInfoDepartStation).getText().equals(departStation)
+                && driver.findElement(ticketInfoArrivalStation).getText().equals(arrivalStation)
+                && driver.findElement(ticketInfoSeatType).getText().equals(seatType)
+                && driver.findElement(ticketInfoDepartDate).getText().equals(departDate)
+                && driver.findElement(ticketInfoAmount).getText().equals(String.valueOf(ticketAmount))
         ) {
             System.out.println("Passed");
         } else {
