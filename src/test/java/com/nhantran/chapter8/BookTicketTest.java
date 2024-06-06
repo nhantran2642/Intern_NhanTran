@@ -24,7 +24,6 @@ public class BookTicketTest extends TestBase {
 
         LoginPage loginPage = new LoginPage();
         homePage = loginPage.login(username, password);
-
         homePage.clickTab("Timetable");
 
         TimetablePage timetablePage = new TimetablePage();
@@ -50,9 +49,9 @@ public class BookTicketTest extends TestBase {
                 && ticketSeatType.equals(seatType)
                 && ticketBookedAmount.equals(String.valueOf(ticketAmount))
         ){
-            System.out.println("Pass");
+            System.out.println("Passed");
         }else{
-            System.out.println("Fail");
+            System.out.println("Failed");
         }
     }
 
