@@ -11,6 +11,7 @@ public class SeleniumActions {
         ((JavascriptExecutor) DriverManager.driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+
     public static void selectByText(WebElement element, String text) {
         Select select = new Select(element);
         select.selectByVisibleText(text);
