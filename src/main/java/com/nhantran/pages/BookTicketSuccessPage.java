@@ -1,39 +1,44 @@
 package com.nhantran.pages;
 
 import com.nhantran.utils.DriverManager;
+import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
 
 public class BookTicketSuccessPage extends BasePage{
 
-    private static final String bookedTicketTableCell = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
-    By headerBookingSuccessfully = By.xpath("//h1");
-    By ticketInfoDepartStation = By.xpath(String.format(bookedTicketTableCell, "Depart Station"));
-    By ticketInfoArrivalStation = By.xpath(String.format(bookedTicketTableCell, "Arrive Station"));
-    By ticketInfoSeatType = By.xpath(String.format(bookedTicketTableCell, "Seat Type"));
-    By ticketInfoDepartDate = By.xpath(String.format(bookedTicketTableCell, "Depart Date"));
-    By ticketInfoAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
+    private String bookedTicketTableCell = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
+    private By headerBookingSuccessfully = By.xpath("//h1");
+    private By ticketInfoDepartStation = By.xpath(String.format(bookedTicketTableCell, "Depart Station"));
+    private By ticketInfoArrivalStation = By.xpath(String.format(bookedTicketTableCell, "Arrive Station"));
+    private By ticketInfoSeatType = By.xpath(String.format(bookedTicketTableCell, "Seat Type"));
+    private By ticketInfoDepartDate = By.xpath(String.format(bookedTicketTableCell, "Depart Date"));
+    private By ticketInfoAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
 
     public String getSuccessfulMessage() {
-        return DriverManager.driver.findElement(headerBookingSuccessfully).getText();
+        return this.getTicketInfo(headerBookingSuccessfully);
     }
 
     public String getDepartStation() {
-        return DriverManager.driver.findElement(ticketInfoDepartStation).getText();
+        return this.getTicketInfo(ticketInfoDepartStation);
     }
 
     public String getArrivalStation() {
-        return DriverManager.driver.findElement(ticketInfoArrivalStation).getText();
+        return this.getTicketInfo(ticketInfoArrivalStation);
     }
 
     public String getSeatType() {
-        return DriverManager.driver.findElement(ticketInfoSeatType).getText();
+        return this.getTicketInfo(ticketInfoSeatType);
     }
 
     public String getDepartDate() {
-        return DriverManager.driver.findElement(ticketInfoDepartDate).getText();
+        return this.getTicketInfo(ticketInfoDepartDate);
     }
 
     public String getTicketAmount() {
-        return DriverManager.driver.findElement(ticketInfoAmount).getText();
+        return this.getTicketInfo(ticketInfoAmount);
+    }
+
+    private String getTicketInfo(By element){
+        return SeleniumActions.getElementText(element);
     }
 }

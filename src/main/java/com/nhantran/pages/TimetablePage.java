@@ -1,14 +1,13 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.DriverManager;
+import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
 
-public class TimetablePage extends BasePage{
+public class TimetablePage extends BasePage {
 
-    protected String checkPriceLink = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='check price']";
+    private String checkPriceLink = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='check price']";
 
-    public TicketPricePage clickCheckPriceLink(String departStation, String arrivalStation){
-        DriverManager.driver.findElement(By.xpath(String.format(checkPriceLink, departStation, arrivalStation))).click();
-        return new TicketPricePage();
+    public void clickCheckPriceLink(String departStation, String arrivalStation) {
+        SeleniumActions.clickElement(By.xpath(String.format(checkPriceLink, departStation, arrivalStation)));
     }
 }
