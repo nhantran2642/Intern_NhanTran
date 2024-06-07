@@ -11,9 +11,9 @@ public class LoginPage extends BasePage {
     private By btnLogin = By.xpath("//input[@value='login']");
 
     public void login(String username, String password) {
-        SeleniumActions.sendKeysToElement(txtUsername, username);
-        SeleniumActions.sendKeysToElement(txtPassword, password);
-        SeleniumActions.clickElement(btnLogin);
+        SeleniumActions.sendKeysToElement(SeleniumActions.findElement(txtUsername), username);
+        SeleniumActions.sendKeysToElement(SeleniumActions.findElement(txtPassword), password);
+        SeleniumActions.clickElement(SeleniumActions.findElement(btnLogin));
     }
 
 

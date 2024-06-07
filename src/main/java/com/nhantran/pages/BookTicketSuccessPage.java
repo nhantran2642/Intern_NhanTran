@@ -3,6 +3,7 @@ package com.nhantran.pages;
 import com.nhantran.utils.DriverManager;
 import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class BookTicketSuccessPage extends BasePage{
 
@@ -15,30 +16,30 @@ public class BookTicketSuccessPage extends BasePage{
     private By ticketInfoAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
 
     public String getSuccessfulMessage() {
-        return this.getTicketInfo(headerBookingSuccessfully);
+        return this.getInfomation(SeleniumActions.findElement(headerBookingSuccessfully));
     }
 
     public String getDepartStation() {
-        return this.getTicketInfo(ticketInfoDepartStation);
+        return this.getInfomation(SeleniumActions.findElement(ticketInfoDepartStation));
     }
 
     public String getArrivalStation() {
-        return this.getTicketInfo(ticketInfoArrivalStation);
+        return this.getInfomation(SeleniumActions.findElement(ticketInfoArrivalStation));
     }
 
     public String getSeatType() {
-        return this.getTicketInfo(ticketInfoSeatType);
+        return this.getInfomation(SeleniumActions.findElement(ticketInfoSeatType));
     }
 
     public String getDepartDate() {
-        return this.getTicketInfo(ticketInfoDepartDate);
+        return this.getInfomation(SeleniumActions.findElement(ticketInfoDepartDate));
     }
 
     public String getTicketAmount() {
-        return this.getTicketInfo(ticketInfoAmount);
+        return this.getInfomation(SeleniumActions.findElement(ticketInfoAmount));
     }
 
-    private String getTicketInfo(By element){
+    private String getInfomation(WebElement element){
         return SeleniumActions.getElementText(element);
     }
 }

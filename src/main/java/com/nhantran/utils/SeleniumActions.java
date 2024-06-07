@@ -22,20 +22,20 @@ public class SeleniumActions {
         select.selectByValue(value);
     }
 
-    public static void clickElement(By element) {
-        findElement(element).click();
+    public static void clickElement(WebElement element) {
+        element.click();
     }
 
     public static WebElement findElement(By element) {
         return DriverManager.driver.findElement(element);
     }
 
-    public static String getElementText(By element) {
-        return findElement(element).getText();
+    public static String getElementText(WebElement element) {
+        return element.getText();
     }
 
-    public static void sendKeysToElement(By element, String key) {
-        findElement(element).sendKeys(key);
+    public static void sendKeysToElement(WebElement element, String key) {
+        element.sendKeys(key);
     }
 
 }

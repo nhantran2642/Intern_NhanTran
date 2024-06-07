@@ -9,7 +9,7 @@ public class BasePage {
 
     public void clickTab(String tabName) {
         By tab = By.xpath(String.format(railwayTab, tabName));
-        SeleniumActions.clickElement(tab);
+        SeleniumActions.clickElement(SeleniumActions.findElement(tab));
     }
 
 }
