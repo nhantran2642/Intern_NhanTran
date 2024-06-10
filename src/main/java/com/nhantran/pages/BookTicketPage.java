@@ -34,7 +34,7 @@ public class BookTicketPage extends BasePage {
     }
 
     public void clickBookTicketButton() {
-        SeleniumActions.clickElement(SeleniumActions.findElement(By.xpath(bookTicketButton)));
+        SeleniumActions.clickElement(By.xpath(bookTicketButton));
     }
 
 

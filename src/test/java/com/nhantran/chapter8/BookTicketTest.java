@@ -11,7 +11,6 @@ public class BookTicketTest extends TestBase {
     private static final String departStation = "Sài Gòn";
     private static final String arrivalStation = "Đà Nẵng";
     private static final String seatType = "Soft seat";
-    ;
     private static final int ticketAmount = 2;
 
     HomePage homePage = new HomePage();
@@ -28,7 +27,7 @@ public class BookTicketTest extends TestBase {
     @Test
     public void TC01_BookTicketAndCheckInfo() {
         homePage.clickTab("Login");
-        loginPage.login(properties.getProperty("username"), properties.getProperty("password"));
+        loginPage.login(properties.getProperty("valid_username"), properties.getProperty("valid_password"));
         homePage.clickTab("Timetable");
         timetablePage.clickCheckPriceLink(departStation, arrivalStation);
         ticketPricePage.clickBookTicketButton(seatType);

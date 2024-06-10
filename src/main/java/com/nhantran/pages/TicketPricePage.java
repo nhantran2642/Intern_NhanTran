@@ -8,6 +8,6 @@ public class TicketPricePage extends BasePage {
     private String bookTicketButton = "//tr[td[text()='%s']]//a[text()='Book ticket']";
 
     public void clickBookTicketButton(String seatType) {
-        SeleniumActions.clickElement(SeleniumActions.findElement(By.xpath(String.format(bookTicketButton, seatType))));
+        SeleniumActions.clickElement(By.xpath(String.format(bookTicketButton, seatType)));
     }
 }

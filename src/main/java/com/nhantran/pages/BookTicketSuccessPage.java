@@ -16,30 +16,30 @@ public class BookTicketSuccessPage extends BasePage{
     private By ticketInfoAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
 
     public String getSuccessfulMessage() {
-        return this.getInfomation(SeleniumActions.findElement(headerBookingSuccessfully));
+        return this.getInformation(headerBookingSuccessfully);
     }
 
     public String getDepartStation() {
-        return this.getInfomation(SeleniumActions.findElement(ticketInfoDepartStation));
+        return this.getInformation(ticketInfoDepartStation);
     }
 
     public String getArrivalStation() {
-        return this.getInfomation(SeleniumActions.findElement(ticketInfoArrivalStation));
+        return this.getInformation(ticketInfoArrivalStation);
     }
 
     public String getSeatType() {
-        return this.getInfomation(SeleniumActions.findElement(ticketInfoSeatType));
+        return this.getInformation(ticketInfoSeatType);
     }
 
     public String getDepartDate() {
-        return this.getInfomation(SeleniumActions.findElement(ticketInfoDepartDate));
+        return this.getInformation(ticketInfoDepartDate);
     }
 
     public String getTicketAmount() {
-        return this.getInfomation(SeleniumActions.findElement(ticketInfoAmount));
+        return this.getInformation(ticketInfoAmount);
     }
 
-    private String getInfomation(WebElement element){
+    private String getInformation(By element){
         return SeleniumActions.getElementText(element);
     }
 }
