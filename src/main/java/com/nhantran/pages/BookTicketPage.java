@@ -10,7 +10,7 @@ public class BookTicketPage extends BasePage {
 
     private void selectBookTicketInfo(String comboBoxName, String value) {
         By bookTicketSelectBox = By.xpath(String.format(selectBox, comboBoxName));
-        SeleniumActions.selectByText(DriverManager.driver.findElement(bookTicketSelectBox), value);
+        SeleniumActions.selectByText(bookTicketSelectBox, value);
     }
 
     public void selectDepartDate(String date) {

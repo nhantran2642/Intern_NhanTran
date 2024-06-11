@@ -16,6 +16,11 @@ import java.util.Properties;
 public class TestBase {
 
     protected static Properties properties;
+    protected static String validUsername;
+    protected static String validPassword;
+    protected static String invalidPassword;
+    protected static String notActiveUsername;
+    protected static String notActivePassword;
 
     public TestBase() {
         try {
@@ -23,6 +28,11 @@ public class TestBase {
             FileInputStream fis = new FileInputStream(
                     System.getProperty("user.dir") + "/src/main/java/com/nhantran/config/config.properties");
             properties.load(fis);
+            validUsername = properties.getProperty("valid_username");
+            validPassword = properties.getProperty("valid_password");
+            invalidPassword = properties.getProperty("invalid_password");
+            notActiveUsername = properties.getProperty("not_active_username");
+            notActivePassword = properties.getProperty("not_active_password");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("file not found");

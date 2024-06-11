@@ -4,6 +4,10 @@
     <test name="Testing">
         <classes>
             <class name="com.nhantran.chapter8.BookTicketTest"/>
+            <class name="com.nhantran.chapter10.LoginTest"/>
+            <class name="com.nhantran.chapter10.LogoutTest"/>
+            <class name="com.nhantran.chapter10.CreateAccountTest"/>
+            <class name="com.nhantran.chapter10.ResetPasswordTest"/>
         </classes>
     </test>
 

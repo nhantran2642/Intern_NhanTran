@@ -9,6 +9,7 @@ public class LoginPage extends BasePage {
     private By txtPassword = By.id("password");
     private By btnLogin = By.xpath("//input[@value='login']");
     private By formErrorMessage = By.xpath("//p[@class='message error LoginForm']");
+    private By forgotPasswordLink = By.xpath("//a[text()='Forgot Password page']");
 
     public void login(String username, String password) {
         SeleniumActions.clear(txtUsername);
@@ -18,13 +19,16 @@ public class LoginPage extends BasePage {
         SeleniumActions.clickElement(btnLogin);
     }
 
-    public boolean checkLoginErrorMessageDisplay(){
+    public boolean checkLoginErrorMessageDisplay() {
         return SeleniumActions.findElement(formErrorMessage).isDisplayed();
     }
 
-    public String getLoginErrorMessage(){
+    public String getLoginErrorMessage() {
         return SeleniumActions.getElementText(formErrorMessage);
     }
 
+    public void clickForgotPasswordLink(){
+        SeleniumActions.clickElement(forgotPasswordLink);
+    }
 
 }

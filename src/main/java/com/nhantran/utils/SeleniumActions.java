@@ -3,8 +3,13 @@ package com.nhantran.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WindowType;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.Set;
 
 public class SeleniumActions {
 
@@ -12,8 +17,8 @@ public class SeleniumActions {
         ((JavascriptExecutor) DriverManager.driver).executeScript("arguments[0].scrollIntoView(true);", findElement(element));
     }
 
-    public static void selectByText(WebElement element, String text) {
-        Select select = new Select(element);
+    public static void selectByText(By element, String text) {
+        Select select = new Select(findElement(element));
         select.selectByVisibleText(text);
     }
 
@@ -39,10 +44,32 @@ public class SeleniumActions {
     }
 
     public static void zoomIn(Double zoomNumber) {
-        ((JavascriptExecutor) DriverManager.driver).executeScript(String.format("document.body.style.zoom = '%f'", zoomNumber));
+        ((JavascriptExecutor) DriverManager.driver).executeScript(java.lang.String.format("document.body.style.zoom = '%f'", zoomNumber));
     }
 
     public static void clear(By element) {
         findElement(element).clear();
+    }
+
+    public static void openWebInNewTab(String url) {
+        DriverManager.driver.switchTo().newWindow(WindowType.TAB);
+        DriverManager.driver.navigate().to(url);
+    }
+
+    public static void switchToWindow(String windowHandle){
+        DriverManager.driver.switchTo().window(windowHandle);
+    }
+
+    public static String getWindowHandle(){
+        return DriverManager.driver.getWindowHandle();
+    }
+
+    public static void waitUntilElementVisible(By element){
+        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(25));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+    }
+
+    public static void refreshPage(){
+        DriverManager.driver.navigate().refresh();
     }
 }
