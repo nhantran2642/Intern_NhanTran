@@ -8,11 +8,11 @@ public class HomePage extends BasePage {
     private By title = By.xpath("//h1");
     private By createAccountHyperlink = By.xpath("//a[text()='create an account']");
 
-    public Boolean checkWelcomeUserMessageDisplay() {
+    public boolean isWelcomeUserMessageDisplayed() {
         return SeleniumActions.findElement(welcomeUserMessage).isDisplayed();
     }
 
-    public boolean checkHomePageTitleDisplay() {
+    public boolean isHomePageTitleDisplayed() {
         return SeleniumActions.findElement(title).isDisplayed();
     }
 

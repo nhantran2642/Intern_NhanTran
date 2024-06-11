@@ -13,7 +13,7 @@ public class BasePage {
         SeleniumActions.clickElement(tab);
     }
 
-    public boolean checkTabDisplay(String tabName) {
+    public boolean isTabDisplayed(String tabName) {
         By tab = By.xpath(String.format(railwayTab, tabName));
         try {
             SeleniumActions.findElement(tab);

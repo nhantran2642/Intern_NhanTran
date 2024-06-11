@@ -21,14 +21,14 @@ public class CreateAccountTest extends TestBase {
     }
 
     @Test(description = "User can't create account with an already in-use email")
-    public void TC007() {
+    public void TC007_FailToCreateAccountWithEmailAlreadyUsed() {
         homePage.clickTab("Register");
         registerPage.register(validUsername, validPassword, validPassword, "0909090909090909");
         Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), "This email address is already in use.", "The error message does not match");
     }
 
     @Test(description = "User can't create account while password and PID fields are empty")
-    public void TC008(){
+    public void TC008_FailToCreateAccountWithEmptyPasswordAndPID(){
         homePage.clickTab("Register");
         registerPage.register(validUsername, "", "", "");
         Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), "There're errors in the form. Please correct the errors and try again.", "The error message does not match");
@@ -37,7 +37,7 @@ public class CreateAccountTest extends TestBase {
     }
 
     @Test(description = "User create and activate account")
-    public void TC009(){
+    public void TC009_SuccessToCreateAndActivateAccount(){
         homePage.clickCreateAccountHyperlink();
         String registerWindow= SeleniumActions.getWindowHandle();
         SeleniumActions.openWebInNewTab("https://www.guerrillamail.com");

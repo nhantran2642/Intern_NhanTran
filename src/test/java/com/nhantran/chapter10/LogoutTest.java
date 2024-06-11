@@ -15,7 +15,7 @@ public class LogoutTest extends TestBase {
     }
 
     @Test(description = "User is redirected to Home page after logging out")
-    public void TC006() {
+    public void TC006_RedirectingToHomepageAfterLoggingOut() {
         homePage.clickTab("Login");
         loginPage.login(validUsername, validPassword);
         homePage.clickTab("FAQ");

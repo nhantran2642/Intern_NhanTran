@@ -30,7 +30,6 @@ public class MailboxPage {
         SeleniumActions.clickElement(confirmMail);
         SeleniumActions.waitUntilElementVisible(confirmLink);
         SeleniumActions.clickElement(confirmLink);
-//        DriverManager.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     public void clickResetPasswordMail() {

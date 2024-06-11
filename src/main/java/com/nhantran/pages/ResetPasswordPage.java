@@ -21,7 +21,7 @@ public class ResetPasswordPage extends BasePage {
         SeleniumActions.clickElement(resetPasswordButton);
     }
 
-    public boolean checkChangePasswordFormDisplayed(){
+    public boolean isChangePasswordFormDisplayed(){
         return SeleniumActions.findElement(changePasswordForm).isDisplayed();
     }
 

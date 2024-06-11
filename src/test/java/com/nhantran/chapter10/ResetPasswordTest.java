@@ -48,7 +48,7 @@ public class ResetPasswordTest extends TestBase {
 
 
     @Test(description = "Reset password shows error if the new password and confirm password doesn't match")
-    public void TC011() {
+    public void TC011_ErrorMessageDisplayWhenNewPasswordDoesNotMatchConfirmPassword() {
         String railwayWindow = SeleniumActions.getWindowHandle();
         homePage.clickTab("Login");
         loginPage.clickForgotPasswordLink();

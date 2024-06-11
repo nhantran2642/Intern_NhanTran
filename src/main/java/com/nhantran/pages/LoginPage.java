@@ -19,7 +19,7 @@ public class LoginPage extends BasePage {
         SeleniumActions.clickElement(btnLogin);
     }
 
-    public boolean checkLoginErrorMessageDisplay() {
+    public boolean isLoginErrorMessageDisplayed() {
         return SeleniumActions.findElement(formErrorMessage).isDisplayed();
     }
 
