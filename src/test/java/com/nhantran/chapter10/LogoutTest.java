@@ -20,7 +20,7 @@ public class LogoutTest extends TestBase {
         loginPage.login(validUsername, validPassword);
         homePage.clickTab("FAQ");
         homePage.clickTab("Log out");
-        Assert.assertEquals(homePage.checkHomePageTitleDisplay(), Boolean.TRUE, "System does not redirect to the Home page");
-        Assert.assertEquals(homePage.checkTabDisplay("Log out"), Boolean.FALSE, "User still does not log out");
+        Assert.assertEquals(homePage.isHomePageTitleDisplayed(), Boolean.TRUE, "System does not redirect to the Home page");
+        Assert.assertEquals(homePage.isTabDisplayed("Log out"), Boolean.FALSE, "User still does not log out");
     }
 }

@@ -23,7 +23,7 @@ public class LoginTest extends TestBase {
         homePage.clickTab("Login");
         loginPage.login(validUsername, validPassword);
         SeleniumActions.zoomIn(1.5);
-        Assert.assertEquals(homePage.checkWelcomeUserMessageDisplay(), Boolean.TRUE, "Welcome message does not display");
+        Assert.assertEquals(homePage.isWelcomeUserMessageDisplayed(), Boolean.TRUE, "Welcome message does not display");
     }
 
     @Test(description = "User cannot login with blank Username text box")

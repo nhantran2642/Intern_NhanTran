@@ -40,7 +40,7 @@ public class ResetPasswordTest extends TestBase {
                 break;
             }
         }
-        Assert.assertEquals(resetPasswordPage.checkChangePasswordFormDisplayed(), Boolean.TRUE, "Change password form does not displayed");
+        Assert.assertEquals(resetPasswordPage.isChangePasswordFormDisplayed(), Boolean.TRUE, "Change password form does not displayed");
         Assert.assertEquals(resetPasswordPage.getResetTokenInTextBox(), resetToken, "Reset token does not match");
         resetPasswordPage.resetPassword(validPassword, validPassword);
         Assert.assertEquals(resetPasswordPage.getMessageAboveForm(), "The new password cannot be the same with the current password", "The error message does not match");
@@ -67,7 +67,7 @@ public class ResetPasswordTest extends TestBase {
                 break;
             }
         }
-        Assert.assertEquals(resetPasswordPage.checkChangePasswordFormDisplayed(), Boolean.TRUE, "Change password form does not displayed");
+        Assert.assertEquals(resetPasswordPage.isChangePasswordFormDisplayed(), Boolean.TRUE, "Change password form does not displayed");
         Assert.assertEquals(resetPasswordPage.getResetTokenInTextBox(), resetToken, "Reset token does not match");
         resetPasswordPage.resetPassword(validPassword, validPassword + "abc");
         Assert.assertEquals(resetPasswordPage.getMessageAboveForm(), "Could not reset password. Please correct the errors and try again.", "The error message above the form does not match");
