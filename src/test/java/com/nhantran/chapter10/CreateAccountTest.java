@@ -1,6 +1,7 @@
 package com.nhantran.chapter10;
 
 import com.nhantran.base.TestBase;
+import com.nhantran.enums.RailwayTabs;
 import com.nhantran.pages.*;
 import com.nhantran.utils.DriverManager;
 import com.nhantran.utils.SeleniumActions;
@@ -22,14 +23,14 @@ public class CreateAccountTest extends TestBase {
 
     @Test(description = "User can't create account with an already in-use email")
     public void TC007_FailToCreateAccountWithEmailAlreadyUsed() {
-        homePage.clickTab("Register");
+        homePage.clickTab(RailwayTabs.REGISTER);
         registerPage.register(validUsername, validPassword, validPassword, "0909090909090909");
         Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), "This email address is already in use.", "The error message does not match");
     }
 
     @Test(description = "User can't create account while password and PID fields are empty")
     public void TC008_FailToCreateAccountWithEmptyPasswordAndPID(){
-        homePage.clickTab("Register");
+        homePage.clickTab(RailwayTabs.REGISTER);
         registerPage.register(validUsername, "", "", "");
         Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), "There're errors in the form. Please correct the errors and try again.", "The error message does not match");
         Assert.assertEquals(registerPage.getErrorMessageNextToPassword(), "Invalid password length", "The error message does not match");

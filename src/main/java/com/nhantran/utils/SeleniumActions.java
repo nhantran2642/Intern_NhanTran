@@ -27,6 +27,11 @@ public class SeleniumActions {
         select.selectByValue(value);
     }
 
+    public static String getSelectedOption(By element){
+        Select select = new Select(findElement(element));
+        return select.getFirstSelectedOption().getText();
+    }
+
     public static void clickElement(By element) {
         SeleniumActions.findElement(element).click();
     }

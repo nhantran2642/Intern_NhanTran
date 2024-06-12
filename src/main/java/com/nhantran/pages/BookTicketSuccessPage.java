@@ -19,6 +19,10 @@ public class BookTicketSuccessPage extends BasePage{
         return this.getInformation(headerBookingSuccessfully);
     }
 
+    public boolean isSuccessfulMessageDisplayed(String message) {
+        return SeleniumActions.findElement(By.xpath(String.format("//h1[text()='%s']",message))).isDisplayed();
+    }
+
     public String getDepartStation() {
         return this.getInformation(ticketInfoDepartStation);
     }

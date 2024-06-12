@@ -4,12 +4,12 @@ import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
-    private By welcomeUserMessage = By.xpath("//div[@id='banner']//strong");
+    private By lblWelcomeUser = By.xpath("//div[@id='banner']//strong");
     private By title = By.xpath("//h1");
-    private By createAccountHyperlink = By.xpath("//a[text()='create an account']");
+    private By lnkCreateAccount = By.xpath("//a[text()='create an account']");
 
     public boolean isWelcomeUserMessageDisplayed() {
-        return SeleniumActions.findElement(welcomeUserMessage).isDisplayed();
+        return SeleniumActions.findElement(lblWelcomeUser).isDisplayed();
     }
 
     public boolean isHomePageTitleDisplayed() {
@@ -17,7 +17,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickCreateAccountHyperlink(){
-        SeleniumActions.clickElement(createAccountHyperlink);
+        SeleniumActions.clickElement(lnkCreateAccount);
     }
 
 }

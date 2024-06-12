@@ -1,6 +1,8 @@
 package com.nhantran.chapter8;
 
 import com.nhantran.base.TestBase;
+import com.nhantran.enums.RailwayStations;
+import com.nhantran.enums.RailwayTabs;
 import com.nhantran.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,15 +28,15 @@ public class BookTicketTest extends TestBase {
 
     @Test
     public void TC01_BookTicketAndCheckInfo() {
-        homePage.clickTab("Login");
+        homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(properties.getProperty("valid_username"), properties.getProperty("valid_password"));
-        homePage.clickTab("Timetable");
-        timetablePage.clickCheckPriceLink(departStation, arrivalStation);
+        homePage.clickTab(RailwayTabs.TIMETABLE);
+        timetablePage.clickCheckPriceLink(RailwayStations.SAI_GON, RailwayStations.DA_NANG);
         ticketPricePage.clickBookTicketButton(seatType);
 
-        bookTicketPage.selectDepartDate(departDate);
-        bookTicketPage.selectAmount(ticketAmount);
-        bookTicketPage.clickBookTicketButton();
+//        bookTicketPage.selectDepartDate(departDate);
+//        bookTicketPage.selectAmount(ticketAmount);
+//        bookTicketPage.clickBookTicketButton();
 
         String successfulMessage = successPage.getSuccessfulMessage();
         String ticketDepartStation = successPage.getDepartStation();

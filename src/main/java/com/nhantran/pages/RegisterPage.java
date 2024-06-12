@@ -10,8 +10,8 @@ public class RegisterPage extends BasePage {
     private By txtConfirmPassword = By.id("confirmPassword");
     private By txtPID = By.id("pid");
     private By btnRegister = By.xpath("//input[@value='Register']");
-    private By formErrorMessage = By.xpath("//p[@class='message error']");
-    private String errorLabel = "//label[@class='validation-error' and @for='%s']";
+    private By lblErrorAboveForm = By.xpath("//p[@class='message error']");
+    private String lblErrorNextToTextBox = "//label[@class='validation-error' and @for='%s']";
 
     public void register(String email, String password, String confirmPassword, String pid) {
         SeleniumActions.clear(txtEmail);
@@ -24,14 +24,14 @@ public class RegisterPage extends BasePage {
     }
 
     public String getErrorMessageAboveRegisterForm(){
-        return SeleniumActions.getElementText(formErrorMessage);
+        return SeleniumActions.getElementText(lblErrorAboveForm);
     }
 
     public String getErrorMessageNextToPassword(){
-        return SeleniumActions.getElementText(By.xpath(String.format(errorLabel,"password")));
+        return SeleniumActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox,"password")));
     }
 
     public String getErrorMessageNextToPID(){
-        return SeleniumActions.getElementText(By.xpath(String.format(errorLabel,"pid")));
+        return SeleniumActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox,"pid")));
     }
 }

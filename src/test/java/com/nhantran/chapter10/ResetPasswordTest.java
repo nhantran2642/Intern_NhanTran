@@ -1,6 +1,7 @@
 package com.nhantran.chapter10;
 
 import com.nhantran.base.TestBase;
+import com.nhantran.enums.RailwayTabs;
 import com.nhantran.pages.*;
 import com.nhantran.utils.DriverManager;
 import com.nhantran.utils.SeleniumActions;
@@ -23,7 +24,7 @@ public class ResetPasswordTest extends TestBase {
     @Test(description = "Reset password shows error if the new password is same as current")
     public void TC010() {
         String railwayWindow = SeleniumActions.getWindowHandle();
-        homePage.clickTab("Login");
+        homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.clickForgotPasswordLink();
         forgetPasswordPage.getResetPasswordLink(validUsername);
         SeleniumActions.openWebInNewTab("https://www.guerrillamail.com");
@@ -50,7 +51,7 @@ public class ResetPasswordTest extends TestBase {
     @Test(description = "Reset password shows error if the new password and confirm password doesn't match")
     public void TC011_ErrorMessageDisplayWhenNewPasswordDoesNotMatchConfirmPassword() {
         String railwayWindow = SeleniumActions.getWindowHandle();
-        homePage.clickTab("Login");
+        homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.clickForgotPasswordLink();
         forgetPasswordPage.getResetPasswordLink(validUsername);
         SeleniumActions.openWebInNewTab("https://www.guerrillamail.com");
