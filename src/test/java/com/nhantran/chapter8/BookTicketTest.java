@@ -34,9 +34,7 @@ public class BookTicketTest extends TestBase {
         timetablePage.clickCheckPriceLink(RailwayStations.SAI_GON, RailwayStations.DA_NANG);
         ticketPricePage.clickBookTicketButton(seatType);
 
-//        bookTicketPage.selectDepartDate(departDate);
-//        bookTicketPage.selectAmount(ticketAmount);
-//        bookTicketPage.clickBookTicketButton();
+        bookTicketPage.bookTicket(departDate, null, null, null, ticketAmount);
 
         String successfulMessage = successPage.getSuccessfulMessage();
         String ticketDepartStation = successPage.getDepartStation();
