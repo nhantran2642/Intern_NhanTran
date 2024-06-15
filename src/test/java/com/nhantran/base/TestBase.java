@@ -1,5 +1,6 @@
 package com.nhantran.base;
 
+import com.nhantran.utils.Constants;
 import com.nhantran.utils.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,12 +16,7 @@ import java.util.Properties;
 
 public class TestBase {
 
-    protected static Properties properties;
-    protected static String validUsername;
-    protected static String validPassword;
-    protected static String invalidPassword;
-    protected static String notActiveUsername;
-    protected static String notActivePassword;
+    private Properties properties;
 
     public TestBase() {
         try {
@@ -28,11 +24,6 @@ public class TestBase {
             FileInputStream fis = new FileInputStream(
                     System.getProperty("user.dir") + "/src/main/java/com/nhantran/config/config.properties");
             properties.load(fis);
-            validUsername = properties.getProperty("valid_username");
-            validPassword = properties.getProperty("valid_password");
-            invalidPassword = properties.getProperty("invalid_password");
-            notActiveUsername = properties.getProperty("not_active_username");
-            notActivePassword = properties.getProperty("not_active_password");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("file not found");
@@ -41,9 +32,9 @@ public class TestBase {
         }
     }
 
-    protected static void startAUT() {
+    protected void startAUT() {
         String browser = properties.getProperty("browser");
-        String url = properties.getProperty("url");
+        String url = Constants.RAILWAY_URL;
         if (browser.equals("chrome")) {
             setChromeDriver(url);
         } else if (browser.equals("firefox")) {
@@ -51,7 +42,7 @@ public class TestBase {
         }
     }
 
-    private static void setChromeDriver(String url) {
+    private void setChromeDriver(String url) {
         WebDriverManager.chromedriver().setup();
         DriverManager.driver = new ChromeDriver();
         DriverManager.driver.manage().window().maximize();
@@ -60,7 +51,7 @@ public class TestBase {
         DriverManager.driver.navigate().to(url);
     }
 
-    private static void setFireFoxDriver(String url) {
+    private void setFireFoxDriver(String url) {
         WebDriverManager.firefoxdriver().setup();
         DriverManager.driver = new FirefoxDriver();
         DriverManager.driver.manage().window().maximize();
@@ -69,11 +60,11 @@ public class TestBase {
         DriverManager.driver.navigate().to(url);
     }
 
-    protected static void closeDriver() {
+    protected void closeDriver() {
         DriverManager.driver.close();
     }
 
-    protected static void quitDriver() {
+    protected void quitDriver() {
         DriverManager.driver.quit();
     }
 

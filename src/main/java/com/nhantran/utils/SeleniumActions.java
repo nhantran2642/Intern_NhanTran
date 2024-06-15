@@ -22,9 +22,14 @@ public class SeleniumActions {
         select.selectByVisibleText(text);
     }
 
-    public static void selectByValue(WebElement element, String value) {
-        Select select = new Select(element);
+    public static void selectByValue(By element, String value) {
+        Select select = new Select(findElement(element));
         select.selectByValue(value);
+    }
+
+    public static String getSelectedOption(By element) {
+        Select select = new Select(findElement(element));
+        return select.getFirstSelectedOption().getText();
     }
 
     public static void clickElement(By element) {
@@ -39,7 +44,7 @@ public class SeleniumActions {
         return SeleniumActions.findElement(element).getText();
     }
 
-    public static void sendKeysToElement(By element, String key) {
+    public static void enter(By element, String key) {
         SeleniumActions.findElement(element).sendKeys(key);
     }
 
@@ -56,20 +61,35 @@ public class SeleniumActions {
         DriverManager.driver.navigate().to(url);
     }
 
-    public static void switchToWindow(String windowHandle){
+    public static void switchToWindow(String windowHandle) {
         DriverManager.driver.switchTo().window(windowHandle);
     }
 
-    public static String getWindowHandle(){
+    public static String getWindowHandle() {
         return DriverManager.driver.getWindowHandle();
     }
 
-    public static void waitUntilElementVisible(By element){
+    public static void waitUntilElementVisible(By element) {
         WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(25));
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
-    public static void refreshPage(){
+    public static void refreshPage() {
         DriverManager.driver.navigate().refresh();
+    }
+
+    public static void acceptAlert() {
+        DriverManager.driver.switchTo().alert().accept();
+    }
+
+    public static void switchToRemainingTab(String windowHandleOfFirstTab, String windowHandleOfSecondTab) {
+        Set<String> allTabs = DriverManager.driver.getWindowHandles();
+        for (String tab : allTabs) {
+            if (!tab.equals(windowHandleOfFirstTab) && !tab.equals(windowHandleOfSecondTab)) {
+                DriverManager.driver.switchTo().window(tab);
+                break;
+            }
+        }
+
     }
 }

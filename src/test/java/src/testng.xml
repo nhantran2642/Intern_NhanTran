@@ -8,7 +8,8 @@
             <class name="com.nhantran.chapter10.LogoutTest"/>
             <class name="com.nhantran.chapter10.CreateAccountTest"/>
             <class name="com.nhantran.chapter10.ResetPasswordTest"/>
+            <class name="com.nhantran.chapter10.BookTicketTest"/>
+            <class name="com.nhantran.chapter10.CancelTicketTest"/>
         </classes>
     </test>
-
 </suite>

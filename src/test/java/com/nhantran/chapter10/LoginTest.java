@@ -1,63 +1,58 @@
 package com.nhantran.chapter10;
 
 import com.nhantran.base.TestBase;
-import com.nhantran.pages.*;
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.enums.RailwayTabs;
+import com.nhantran.models.User;
+import com.nhantran.pages.HomePage;
+import com.nhantran.pages.LoginPage;
+import com.nhantran.utils.Constants;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest extends TestBase {
 
-    HomePage homePage = new HomePage();
-    LoginPage loginPage = new LoginPage();
-
-    public LoginTest() {
-        super();
-    }
-
-    private String loginContentErrorMessage = "There was a problem with your login and/or errors exist in your form.";
-    private String loginAccountErrorMessage = "Invalid username or password. Please try again.";
+    private HomePage homePage = new HomePage();
+    private LoginPage loginPage = new LoginPage();
+    private User validUser = new User(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
+    private User invalidUser = new User(Constants.VALID_USERNAME, Constants.INVALID_PASSWORD);
+    private User nonActiveUser = new User(Constants.NON_ACTIVE_USERNAME, Constants.NON_ACTIVE_PASSWORD);
 
     @Test(description = "User can log into Railway with valid username and password")
     public void TC001_SuccessToLoginWithValidAccount() {
-        homePage.clickTab("Login");
-        loginPage.login(validUsername, validPassword);
-        SeleniumActions.zoomIn(1.5);
-        Assert.assertEquals(homePage.isWelcomeUserMessageDisplayed(), Boolean.TRUE, "Welcome message does not display");
+        homePage.clickTab(RailwayTabs.LOGIN);
+        loginPage.login(validUser);
+        Assert.assertEquals(homePage.isTabDisplayed(RailwayTabs.LOG_OUT), Boolean.TRUE);
+        Assert.assertEquals(homePage.isWelcomeUserMessageDisplayed(), Boolean.TRUE);
     }
 
-    @Test(description = "User cannot login with blank Username text box")
-    public void TC002_ErrorMessageDisplayWhenLoggingInWithBlankUsername() {
-        homePage.clickTab("Login");
-        loginPage.login("", validUsername);
-        Assert.assertEquals(loginPage.getLoginErrorMessage(), loginContentErrorMessage, "The error message does not match");
+    @DataProvider(name = "loginData")
+    public Object[][] dataTestTC002AndTC003() {
+        return new Object[][]{
+                {new User(null, Constants.VALID_PASSWORD), "There was a problem with your login and/or errors exist in your form."},
+                {invalidUser, "There was a problem with your login and/or errors exist in your form."}
+        };
     }
 
-    @Test(description = "User cannot log into Railway with invalid password")
-    public void TC003_ErrorMessageDisplayWhenLoggingInWithInvalidPassword() {
-        homePage.clickTab("Login");
-        loginPage.login(validUsername, invalidPassword);
-        Assert.assertEquals(loginPage.getLoginErrorMessage(), loginContentErrorMessage, "The error message does not match");
+    @Test( dataProvider = "loginData", description = "User cannot login with blank Username text box or invalid password")
+    public void TC002_003_ErrorMessageDisplayWhenLoggingInWithBlankUsernameOrInvalidPassword(User user, String expectedErrorMessage) {
+        homePage.clickTab(RailwayTabs.LOGIN);
+        loginPage.login(user);
+        Assert.assertEquals(loginPage.getLoginErrorMessage(), expectedErrorMessage);
     }
 
     @Test(description = "System shows message when user enters wrong password many times")
     public void TC004_ErrorMessagesDisplayWhenEnteringWrongPasswordManyTimes() {
-        String errorMessageAfter4LoginAttempts = "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.";
-        homePage.clickTab("Login");
-        int i = 1;
-        while (i < 6) {
-            loginPage.login(validUsername, invalidPassword);
-            Assert.assertEquals(loginPage.getLoginErrorMessage(), loginAccountErrorMessage, "The error message does not match");
-            i++;
-        }
-        Assert.assertEquals(loginPage.getLoginErrorMessage(), errorMessageAfter4LoginAttempts, "The error message does not match");
+        homePage.clickTab(RailwayTabs.LOGIN);
+        loginPage.loginManyTimes(invalidUser, 5);
+        Assert.assertEquals(loginPage.getLoginErrorMessage(), "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.");
     }
 
     @Test(description = "User can't login with an account hasn't been activated")
     public void TC005_UserCannotLoginWithUnactivatedAccount() {
-        homePage.clickTab("Login");
-        loginPage.login(notActiveUsername, notActivePassword);
-        Assert.assertEquals(loginPage.getLoginErrorMessage(), loginAccountErrorMessage, "The error message does not match");
+        homePage.clickTab(RailwayTabs.LOGIN);
+        loginPage.login(nonActiveUser);
+        Assert.assertEquals(loginPage.getLoginErrorMessage(), "Invalid username or password. Please try again.");
     }
 
 }

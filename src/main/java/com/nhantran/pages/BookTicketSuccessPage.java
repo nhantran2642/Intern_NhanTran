@@ -1,11 +1,9 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.DriverManager;
 import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-public class BookTicketSuccessPage extends BasePage{
+public class BookTicketSuccessPage extends BasePage {
 
     private String bookedTicketTableCell = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
     private By headerBookingSuccessfully = By.xpath("//h1");
@@ -17,6 +15,10 @@ public class BookTicketSuccessPage extends BasePage{
 
     public String getSuccessfulMessage() {
         return this.getInformation(headerBookingSuccessfully);
+    }
+
+    public boolean isSuccessfulMessageDisplayed(String message) {
+        return SeleniumActions.findElement(By.xpath(String.format("//h1[text()='%s']", message))).isDisplayed();
     }
 
     public String getDepartStation() {
@@ -35,11 +37,11 @@ public class BookTicketSuccessPage extends BasePage{
         return this.getInformation(ticketInfoDepartDate);
     }
 
-    public String getTicketAmount() {
-        return this.getInformation(ticketInfoAmount);
+    public Integer getTicketAmount() {
+        return Integer.parseInt(this.getInformation(ticketInfoAmount));
     }
 
-    private String getInformation(By element){
+    private String getInformation(By element) {
         return SeleniumActions.getElementText(element);
     }
 }

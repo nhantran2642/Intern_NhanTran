@@ -1,13 +1,13 @@
 package com.nhantran.chapter10;
 
 import com.nhantran.base.TestBase;
+import com.nhantran.enums.RailwayTabs;
 import com.nhantran.pages.*;
-import com.nhantran.utils.DriverManager;
+import com.nhantran.utils.Constants;
 import com.nhantran.utils.SeleniumActions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.Set;
 
 public class ResetPasswordTest extends TestBase {
     HomePage homePage = new HomePage();
@@ -16,61 +16,31 @@ public class ResetPasswordTest extends TestBase {
     ForgetPasswordPage forgetPasswordPage = new ForgetPasswordPage();
     ResetPasswordPage resetPasswordPage = new ResetPasswordPage();
 
-    public ResetPasswordTest() {
-        super();
+    @DataProvider(name = "resetPasswordData")
+    public Object[][] dataTestTC010AndTC011() {
+        return new Object[][]{
+                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD, Constants.VALID_PASSWORD, "The new password cannot be the same with the current password", null},
+                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD + "a", Constants.VALID_PASSWORD + "abc", "Could not reset password. Please correct the errors and try again.", "The password confirmation did not match the new password."}
+        };
     }
 
-    @Test(description = "Reset password shows error if the new password is same as current")
-    public void TC010() {
+    @Test(dataProvider = "resetPasswordData", description = "Reset password shows error if the new password is same as current password or not matches the confirm password")
+    public void TC010_011_ErrorMessageDisplayWhenNewPasswordSameAsOldPasswordOrNotMatchConfirmPassword(String username, String password, String confirmPassword, String expectedMessageAboveForm, String expectedMessageNextToTextBox) {
         String railwayWindow = SeleniumActions.getWindowHandle();
-        homePage.clickTab("Login");
+        homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.clickForgotPasswordLink();
-        forgetPasswordPage.getResetPasswordLink(validUsername);
-        SeleniumActions.openWebInNewTab("https://www.guerrillamail.com");
+        forgetPasswordPage.getResetPasswordLink(username);
+        SeleniumActions.openWebInNewTab(Constants.TEMPORARY_MAIL_URL);
         String mailWindow = SeleniumActions.getWindowHandle();
-        mailboxPage.setMail(validUsername);
+        mailboxPage.setMail(username);
         mailboxPage.clickResetPasswordMail();
         String resetToken = mailboxPage.getResetPasswordToken();
         mailboxPage.clickResetPasswordLinkInMail();
-
-        Set<String> allTabs = DriverManager.driver.getWindowHandles();
-        for (String tab : allTabs) {
-            if (!tab.equals(mailWindow) && !tab.equals(railwayWindow)) {
-                DriverManager.driver.switchTo().window(tab);
-                break;
-            }
-        }
-        Assert.assertEquals(resetPasswordPage.isChangePasswordFormDisplayed(), Boolean.TRUE, "Change password form does not displayed");
-        Assert.assertEquals(resetPasswordPage.getResetTokenInTextBox(), resetToken, "Reset token does not match");
-        resetPasswordPage.resetPassword(validPassword, validPassword);
-        Assert.assertEquals(resetPasswordPage.getMessageAboveForm(), "The new password cannot be the same with the current password", "The error message does not match");
-    }
-
-
-    @Test(description = "Reset password shows error if the new password and confirm password doesn't match")
-    public void TC011_ErrorMessageDisplayWhenNewPasswordDoesNotMatchConfirmPassword() {
-        String railwayWindow = SeleniumActions.getWindowHandle();
-        homePage.clickTab("Login");
-        loginPage.clickForgotPasswordLink();
-        forgetPasswordPage.getResetPasswordLink(validUsername);
-        SeleniumActions.openWebInNewTab("https://www.guerrillamail.com");
-        String mailWindow = SeleniumActions.getWindowHandle();
-        mailboxPage.setMail(validUsername);
-        mailboxPage.clickResetPasswordMail();
-        String resetToken = mailboxPage.getResetPasswordToken();
-        mailboxPage.clickResetPasswordLinkInMail();
-
-        Set<String> allTabs = DriverManager.driver.getWindowHandles();
-        for (String tab : allTabs) {
-            if (!tab.equals(mailWindow) && !tab.equals(railwayWindow)) {
-                DriverManager.driver.switchTo().window(tab);
-                break;
-            }
-        }
-        Assert.assertEquals(resetPasswordPage.isChangePasswordFormDisplayed(), Boolean.TRUE, "Change password form does not displayed");
-        Assert.assertEquals(resetPasswordPage.getResetTokenInTextBox(), resetToken, "Reset token does not match");
-        resetPasswordPage.resetPassword(validPassword, validPassword + "abc");
-        Assert.assertEquals(resetPasswordPage.getMessageAboveForm(), "Could not reset password. Please correct the errors and try again.", "The error message above the form does not match");
-        Assert.assertEquals(resetPasswordPage.getMessageNextToConfirmPassword(), "The password confirmation did not match the new password.", "The error message next to the confirm password textbox does not match");
+        SeleniumActions.switchToRemainingTab(railwayWindow, mailWindow);
+        Assert.assertEquals(resetPasswordPage.isChangePasswordFormDisplayed(), Boolean.TRUE);
+        Assert.assertEquals(resetPasswordPage.getResetTokenInTextBox(), resetToken);
+        resetPasswordPage.resetPassword(password, confirmPassword);
+        Assert.assertEquals(resetPasswordPage.getMessageAboveForm(), expectedMessageAboveForm);
+        Assert.assertEquals(resetPasswordPage.getMessageNextToConfirmPassword(), expectedMessageNextToTextBox);
     }
 }

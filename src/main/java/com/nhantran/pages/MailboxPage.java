@@ -4,21 +4,21 @@ import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
 
 public class MailboxPage {
-    By scrambleAddressCheckbox = By.xpath("//input[@type='checkbox' and following-sibling::label[text()=' Scramble Address']]");
-    By txtMail = By.xpath("//span[@id='email-widget']");
-    By confirmMail = By.xpath("//table[@id='email_table']//tr[contains(@class, 'mail')]//td[contains(.,'Please confirm your account')]");
-    By confirmLink = By.xpath("//*[@class='email_body']//a[contains(@href,'confirmationCode')]");
-    By resetPasswordMail = By.xpath("//tr[contains(@class,'email_unread')]//td[contains(.,'Please reset your password')]");
-    By resetPasswordLink = By.xpath("//*[@class='email_body']//a[contains(@href,'PasswordReset')]");
-    By mailUsernameBox = By.xpath("//span[@id='inbox-id']");
-    By mailUsernameInput = By.xpath("//span[@id='inbox-id']/input[@type='text']");
-    By setMailUsernameButton = By.xpath("//span[@id='inbox-id']/button[text()='Set']");
-    By mailDomainSelectBox = By.xpath("//select[@id='gm-host-select']");
-    By emailBody = By.xpath("//div[@class='email_body']");
+    private By chbScrambleAddress = By.xpath("//input[@type='checkbox' and following-sibling::label[text()=' Scramble Address']]");
+    private By txtMail = By.xpath("//span[@id='email-widget']");
+    private By mailConfirm = By.xpath("//table[@id='email_table']//tr[contains(@class, 'mail')]//td[contains(.,'Please confirm your account')]");
+    private By lnkConfirm = By.xpath("//*[@class='email_body']//a[contains(@href,'confirmationCode')]");
+    private By mailResetPassword = By.xpath("//tr[contains(@class,'email_unread')]//td[contains(.,'Please reset your password')]");
+    private By lnkResetPassword = By.xpath("//*[@class='email_body']//a[contains(@href,'PasswordReset')]");
+    private By btnMailUsername = By.xpath("//span[@id='inbox-id']");
+    private By txtMailUsername = By.xpath("//span[@id='inbox-id']/input[@type='text']");
+    private By btnSetMailUsername = By.xpath("//span[@id='inbox-id']/button[text()='Set']");
+    private By cbbMailDomain = By.xpath("//select[@id='gm-host-select']");
+    private By mailBody = By.xpath("//div[@class='email_body']");
 
 
     public void clickScrambleAddressCheckbox() {
-        SeleniumActions.clickElement(scrambleAddressCheckbox);
+        SeleniumActions.clickElement(chbScrambleAddress);
     }
 
     public String getMail() {
@@ -26,30 +26,30 @@ public class MailboxPage {
     }
 
     public void clickConfirmLinkInMail() {
-        SeleniumActions.waitUntilElementVisible(confirmMail);
-        SeleniumActions.clickElement(confirmMail);
-        SeleniumActions.waitUntilElementVisible(confirmLink);
-        SeleniumActions.clickElement(confirmLink);
+        SeleniumActions.waitUntilElementVisible(mailConfirm);
+        SeleniumActions.clickElement(mailConfirm);
+        SeleniumActions.waitUntilElementVisible(lnkConfirm);
+        SeleniumActions.clickElement(lnkConfirm);
     }
 
     public void clickResetPasswordMail() {
-        SeleniumActions.waitUntilElementVisible(resetPasswordMail);
-        SeleniumActions.clickElement(resetPasswordMail);
+        SeleniumActions.waitUntilElementVisible(mailResetPassword);
+        SeleniumActions.clickElement(mailResetPassword);
     }
 
     public void clickResetPasswordLinkInMail() {
-        SeleniumActions.waitUntilElementVisible(resetPasswordLink);
-        SeleniumActions.clickElement(resetPasswordLink);
+        SeleniumActions.waitUntilElementVisible(lnkResetPassword);
+        SeleniumActions.clickElement(lnkResetPassword);
     }
 
     public void setMail(String mail) {
         String username = getMailUsername(mail);
         String domain = getMailDomain(mail);
-        SeleniumActions.clickElement(mailUsernameBox);
-        SeleniumActions.clear(mailUsernameInput);
-        SeleniumActions.sendKeysToElement(mailUsernameInput, username);
-        SeleniumActions.clickElement(setMailUsernameButton);
-        SeleniumActions.selectByText(mailDomainSelectBox, domain);
+        SeleniumActions.clickElement(btnMailUsername);
+        SeleniumActions.clear(txtMailUsername);
+        SeleniumActions.enter(txtMailUsername, username);
+        SeleniumActions.clickElement(btnSetMailUsername);
+        SeleniumActions.selectByText(cbbMailDomain, domain);
     }
 
     private String getMailUsername(String mail) {
@@ -62,8 +62,8 @@ public class MailboxPage {
         return mailItem[1];
     }
 
-    public String getResetPasswordToken(){
-        String mailText = SeleniumActions.getElementText(emailBody);
+    public String getResetPasswordToken() {
+        String mailText = SeleniumActions.getElementText(mailBody);
         String[] parts = mailText.split("The token is: ");
         if (parts.length > 1) {
             String[] tokenParts = parts[1].split("\\.");
