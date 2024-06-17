@@ -6,16 +6,20 @@ import org.openqa.selenium.By;
 
 public class TimetablePage extends BasePage {
 
-    private String lnkCheckPrice = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='check price']";
-    private String linkBookTicket = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='book ticket']";
+    private String dynLinkCheckPrice = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='check price']";
+    private String dynLinkBookTicket = "//tr[td[text()='%s' and following-sibling::td[text()='%s']]]//a[text()='book ticket']";
 
     public void clickCheckPriceLink(RailwayStations departStation, RailwayStations arrivalStation) {
-        SeleniumActions.scrollToElement((By.xpath(String.format(lnkCheckPrice, departStation.getValue(), arrivalStation.getValue()))));
-        SeleniumActions.clickElement((By.xpath(String.format(lnkCheckPrice, departStation.getValue(), arrivalStation.getValue()))));
+        clickLink(dynLinkCheckPrice, departStation, arrivalStation);
     }
 
     public void clickBookTicketLink(RailwayStations departStation, RailwayStations arrivalStation) {
-        SeleniumActions.scrollToElement((By.xpath(String.format(linkBookTicket, departStation.getValue(), arrivalStation.getValue()))));
-        SeleniumActions.clickElement((By.xpath(String.format(linkBookTicket, departStation.getValue(), arrivalStation.getValue()))));
+        clickLink(dynLinkBookTicket, departStation, arrivalStation);
+    }
+
+    private void clickLink(String dynamicLinkType, RailwayStations departStation, RailwayStations arrivalStation){
+        By link = By.xpath(String.format(dynamicLinkType, departStation.getValue(), arrivalStation.getValue()));
+        SeleniumActions.scrollToElement(link);
+        SeleniumActions.clickElement(link);
     }
 }

@@ -48,10 +48,6 @@ public class SeleniumActions {
         SeleniumActions.findElement(element).sendKeys(key);
     }
 
-    public static void zoomIn(Double zoomNumber) {
-        ((JavascriptExecutor) DriverManager.driver).executeScript(java.lang.String.format("document.body.style.zoom = '%f'", zoomNumber));
-    }
-
     public static void clear(By element) {
         findElement(element).clear();
     }

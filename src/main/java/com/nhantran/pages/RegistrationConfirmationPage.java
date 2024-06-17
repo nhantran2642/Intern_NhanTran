@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 
 public class RegistrationConfirmationPage extends BasePage {
 
-    By lblConfirmSuccess = By.xpath("//p");
+    private By lblConfirmSuccess = By.xpath("//p");
 
     public String getConfirmationSuccessMessage() {
         return SeleniumActions.getElementText(lblConfirmSuccess);

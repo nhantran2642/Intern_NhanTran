@@ -22,7 +22,7 @@ public class TestBase {
         try {
             properties = new Properties();
             FileInputStream fis = new FileInputStream(
-                    System.getProperty("user.dir") + "/src/main/java/com/nhantran/config/config.properties");
+                    System.getProperty("user.dir") + Constants.PROPERTY_PATH);
             properties.load(fis);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

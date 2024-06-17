@@ -5,16 +5,16 @@ import org.openqa.selenium.By;
 
 public class BookTicketSuccessPage extends BasePage {
 
-    private String bookedTicketTableCell = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
-    private By headerBookingSuccessfully = By.xpath("//h1");
-    private By ticketInfoDepartStation = By.xpath(String.format(bookedTicketTableCell, "Depart Station"));
-    private By ticketInfoArrivalStation = By.xpath(String.format(bookedTicketTableCell, "Arrive Station"));
-    private By ticketInfoSeatType = By.xpath(String.format(bookedTicketTableCell, "Seat Type"));
-    private By ticketInfoDepartDate = By.xpath(String.format(bookedTicketTableCell, "Depart Date"));
-    private By ticketInfoAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
+    private String celBookedTicketTable = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
+    private By hdrBookingSuccessfully = By.xpath("//h1");
+    private By lblTicketDepartStation = By.xpath(String.format(celBookedTicketTable, "Depart Station"));
+    private By lblTicketArrivalStation = By.xpath(String.format(celBookedTicketTable, "Arrive Station"));
+    private By lblTicketSeatType = By.xpath(String.format(celBookedTicketTable, "Seat Type"));
+    private By lblTicketDepartDate = By.xpath(String.format(celBookedTicketTable, "Depart Date"));
+    private By lblTicketAmount = By.xpath(String.format(celBookedTicketTable, "Amount"));
 
     public String getSuccessfulMessage() {
-        return this.getInformation(headerBookingSuccessfully);
+        return this.getInformation(hdrBookingSuccessfully);
     }
 
     public boolean isSuccessfulMessageDisplayed(String message) {
@@ -22,23 +22,23 @@ public class BookTicketSuccessPage extends BasePage {
     }
 
     public String getDepartStation() {
-        return this.getInformation(ticketInfoDepartStation);
+        return this.getInformation(lblTicketDepartStation);
     }
 
     public String getArrivalStation() {
-        return this.getInformation(ticketInfoArrivalStation);
+        return this.getInformation(lblTicketArrivalStation);
     }
 
     public String getSeatType() {
-        return this.getInformation(ticketInfoSeatType);
+        return this.getInformation(lblTicketSeatType);
     }
 
     public String getDepartDate() {
-        return this.getInformation(ticketInfoDepartDate);
+        return this.getInformation(lblTicketDepartDate);
     }
 
     public Integer getTicketAmount() {
-        return Integer.parseInt(this.getInformation(ticketInfoAmount));
+        return Integer.parseInt(this.getInformation(lblTicketAmount));
     }
 
     private String getInformation(By element) {

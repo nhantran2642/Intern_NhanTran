@@ -8,38 +8,39 @@ import com.nhantran.pages.MailboxPage;
 import com.nhantran.pages.RegisterPage;
 import com.nhantran.pages.RegistrationConfirmationPage;
 import com.nhantran.utils.Constants;
+import com.nhantran.utils.Messages;
 import com.nhantran.utils.SeleniumActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CreateAccountTest extends TestBase {
 
-    HomePage homePage = new HomePage();
-    RegisterPage registerPage = new RegisterPage();
-    MailboxPage mailboxPage = new MailboxPage();
-    RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage();
+    private HomePage homePage = new HomePage();
+    private RegisterPage registerPage = new RegisterPage();
+    private MailboxPage mailboxPage = new MailboxPage();
+    private RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage();
     private User alreadyRegistedUser = new User(Constants.VALID_USERNAME, "0987654321", "0987654321", "000000000000");
     private User emptyPasswordPidUser = new User(Constants.VALID_USERNAME, null, null, null);
     private User newUser;
 
     @Test(description = "User can't create account with an already in-use email")
-    public void TC007_FailToCreateAccountWithEmailAlreadyUsed() {
+    public void TC007_CreateAccountFailWithEmailAlreadyUsed() {
         homePage.clickTab(RailwayTabs.REGISTER);
         registerPage.register(alreadyRegistedUser);
-        Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), "This email address is already in use.", "The error message does not match");
+        Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), Messages.MSG_ERROR_REGISTER_USED_EMAIL, "The error message does not match");
     }
 
     @Test(description = "User can't create account while password and PID fields are empty")
-    public void TC008_FailToCreateAccountWithEmptyPasswordAndPID() {
+    public void TC008_CreateAccountFailWithEmptyPasswordAndPID() {
         homePage.clickTab(RailwayTabs.REGISTER);
         registerPage.register(emptyPasswordPidUser);
-        Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), "There're errors in the form. Please correct the errors and try again.", "The error message does not match");
-        Assert.assertEquals(registerPage.getErrorMessageNextToPassword(), "Invalid password length", "The error message does not match");
-        Assert.assertEquals(registerPage.getErrorMessageNextToPID(), "Invalid ID length", "The error message does not match");
+        Assert.assertEquals(registerPage.getErrorMessageAboveRegisterForm(), Messages.MSG_ERROR_ABOVE_REGISTER_FORM, "The error message does not match");
+        Assert.assertEquals(registerPage.getErrorMessageNextToPassword(), Messages.MSG_ERROR_PASSWORD_LENGTH, "The error message does not match");
+        Assert.assertEquals(registerPage.getErrorMessageNextToPID(), Messages.MSG_ERROR_PID_LENGTH, "The error message does not match");
     }
 
     @Test(description = "User create and activate account")
-    public void TC009_SuccessToCreateAndActivateAccount() {
+    public void TC009_CreateAndActiveSuccessfullyAnAccount() {
         homePage.clickCreateAccountHyperlink();
         String railwayWindow = SeleniumActions.getWindowHandle();
         SeleniumActions.openWebInNewTab(Constants.TEMPORARY_MAIL_URL);
@@ -53,6 +54,6 @@ public class CreateAccountTest extends TestBase {
         SeleniumActions.refreshPage();
         mailboxPage.clickConfirmLinkInMail();
         SeleniumActions.switchToRemainingTab(railwayWindow, mailWindow);
-        Assert.assertEquals(registrationConfirmationPage.getConfirmationSuccessMessage(), "Registration Confirmed! You can now log in to the site.", "Message does not show");
+        Assert.assertEquals(registrationConfirmationPage.getConfirmationSuccessMessage(), Messages.MSG_SUCCESS_CONFIRM_REGISTRATION, "The registration confirmation message does not match");
     }
 }

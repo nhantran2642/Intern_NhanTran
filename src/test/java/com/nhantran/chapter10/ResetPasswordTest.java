@@ -4,23 +4,24 @@ import com.nhantran.base.TestBase;
 import com.nhantran.enums.RailwayTabs;
 import com.nhantran.pages.*;
 import com.nhantran.utils.Constants;
+import com.nhantran.utils.Messages;
 import com.nhantran.utils.SeleniumActions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ResetPasswordTest extends TestBase {
-    HomePage homePage = new HomePage();
-    LoginPage loginPage = new LoginPage();
-    MailboxPage mailboxPage = new MailboxPage();
-    ForgetPasswordPage forgetPasswordPage = new ForgetPasswordPage();
-    ResetPasswordPage resetPasswordPage = new ResetPasswordPage();
+    private HomePage homePage = new HomePage();
+    private LoginPage loginPage = new LoginPage();
+    private MailboxPage mailboxPage = new MailboxPage();
+    private ForgetPasswordPage forgetPasswordPage = new ForgetPasswordPage();
+    private ResetPasswordPage resetPasswordPage = new ResetPasswordPage();
 
     @DataProvider(name = "resetPasswordData")
     public Object[][] dataTestTC010AndTC011() {
         return new Object[][]{
-                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD, Constants.VALID_PASSWORD, "The new password cannot be the same with the current password", null},
-                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD + "a", Constants.VALID_PASSWORD + "abc", "Could not reset password. Please correct the errors and try again.", "The password confirmation did not match the new password."}
+                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD, Constants.VALID_PASSWORD, Messages.MSG_ERROR_NEW_PASSWORD_SAME_OLD_PASSWORD, null},
+                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD + "a", Constants.VALID_PASSWORD + "abc", Messages.MSG_ERROR_ABOVE_RESET_PASSWORD_FORM, Messages.MSG_ERROR_CONFIRM_PASSWORD_NOT_MATCH_PASSWORD}
         };
     }
 
@@ -29,7 +30,7 @@ public class ResetPasswordTest extends TestBase {
         String railwayWindow = SeleniumActions.getWindowHandle();
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.clickForgotPasswordLink();
-        forgetPasswordPage.getResetPasswordLink(username);
+        forgetPasswordPage.submitPasswordResetInstructionsForm(username);
         SeleniumActions.openWebInNewTab(Constants.TEMPORARY_MAIL_URL);
         String mailWindow = SeleniumActions.getWindowHandle();
         mailboxPage.setMail(username);
@@ -37,7 +38,7 @@ public class ResetPasswordTest extends TestBase {
         String resetToken = mailboxPage.getResetPasswordToken();
         mailboxPage.clickResetPasswordLinkInMail();
         SeleniumActions.switchToRemainingTab(railwayWindow, mailWindow);
-        Assert.assertEquals(resetPasswordPage.isChangePasswordFormDisplayed(), Boolean.TRUE);
+        Assert.assertTrue(resetPasswordPage.isChangePasswordFormDisplayed());
         Assert.assertEquals(resetPasswordPage.getResetTokenInTextBox(), resetToken);
         resetPasswordPage.resetPassword(password, confirmPassword);
         Assert.assertEquals(resetPasswordPage.getMessageAboveForm(), expectedMessageAboveForm);

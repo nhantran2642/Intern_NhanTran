@@ -7,58 +7,55 @@ import com.nhantran.models.Tickets;
 import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.EnumSet;
 
 public class BookTicketPage extends BasePage {
-    private String selectBox = "//select[@name='%s']";
-    private String bookTicketButton = "//input[@value='Book ticket']";
+    private String dynCbbBookTicket = "//select[@name='%s']";
+    private String btnBookTicket = "//input[@value='Book ticket']";
 
-    private void selectBookTicketInfo(BookTicketComboBoxes comboBoxName, String value) {
-        if (value != null) {
-            By bookTicketSelectBox = By.xpath(String.format(selectBox, comboBoxName.getValue()));
-            SeleniumActions.scrollToElement(bookTicketSelectBox);
-            SeleniumActions.selectByText(bookTicketSelectBox, value);
-        }
+    private void selectCombobox(BookTicketComboBoxes comboBoxName, String value) {
+        By cbbBookTicket = By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue()));
+        SeleniumActions.scrollToElement(cbbBookTicket);
+        SeleniumActions.selectByText(cbbBookTicket, value);
     }
 
     private void selectDepartDate(String date) {
         if (date != null)
-            this.selectBookTicketInfo(BookTicketComboBoxes.DEPART_DATE, date);
+            this.selectCombobox(BookTicketComboBoxes.DEPART_DATE, date);
     }
 
     private void selectDepartStation(RailwayStations departStation) {
         if (departStation != null)
-            this.selectBookTicketInfo(BookTicketComboBoxes.DEPART_STATION, departStation.getValue());
+            this.selectCombobox(BookTicketComboBoxes.DEPART_STATION, departStation.getValue());
     }
 
     private void selectArrivalStation(RailwayStations arrivalStation) {
-        if (arrivalStation != null)
-            this.selectBookTicketInfo(BookTicketComboBoxes.ARRIVE_STATION, arrivalStation.getValue());
+        if (arrivalStation != null) {
+            this.selectCombobox(BookTicketComboBoxes.ARRIVE_STATION, arrivalStation.getValue());
+        }
     }
 
     private void selectSeatType(SeatTypes seatType) {
         if (seatType != null)
-            this.selectBookTicketInfo(BookTicketComboBoxes.SEAT_TYPE, seatType.getValue());
+            this.selectCombobox(BookTicketComboBoxes.SEAT_TYPE, seatType.getValue());
     }
 
     private void selectAmount(Integer amount) {
         if (amount > 0)
-            this.selectBookTicketInfo(BookTicketComboBoxes.AMOUNT, String.valueOf(amount));
+            this.selectCombobox(BookTicketComboBoxes.AMOUNT, String.valueOf(amount));
     }
 
     private void clickBookTicketButton() {
-        SeleniumActions.scrollToElement(By.xpath(bookTicketButton));
-        SeleniumActions.clickElement(By.xpath(bookTicketButton));
+        SeleniumActions.scrollToElement(By.xpath(btnBookTicket));
+        SeleniumActions.clickElement(By.xpath(btnBookTicket));
     }
 
     public void bookTicket(Tickets ticket) {
         selectDepartDate(ticket.getDepartDate());
         selectDepartStation(ticket.getDepartStation());
-        selectArrivalStation(ticket.getArrivalStation());
         selectSeatType(ticket.getSeatType());
         selectAmount(ticket.getTicketAmount());
+        selectArrivalStation(ticket.getArrivalStation());
         clickBookTicketButton();
     }
 
@@ -69,12 +66,8 @@ public class BookTicketPage extends BasePage {
         if (!ALLOWED_STATIONS.contains(comboBoxName)) {
             throw new IllegalArgumentException("Invalid combobox: " + comboBoxName);
         }
-        return SeleniumActions.getSelectedOption(By.xpath(String.format(selectBox, comboBoxName.getValue())));
+        return SeleniumActions.getSelectedOption(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
     }
 
-    public String calculateNextDate(int numberOfNextDays) {
-        LocalDate currentDate = LocalDate.now();
-        LocalDate nextDate = currentDate.plusDays(numberOfNextDays);
-        return nextDate.format(DateTimeFormatter.ofPattern("M/d/yyyy"));
-    }
+
 }

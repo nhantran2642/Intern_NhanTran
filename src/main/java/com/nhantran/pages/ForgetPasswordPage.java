@@ -5,11 +5,10 @@ import org.openqa.selenium.By;
 
 public class ForgetPasswordPage extends BasePage {
     private By txtEmail = By.xpath("//input[@id='email']");
-    private By sendInstructionButton = By.xpath("//input[@type='submit']");
+    private By btnSendInstruction = By.xpath("//input[@type='submit']");
 
-
-    public void getResetPasswordLink(String email) {
+    public void submitPasswordResetInstructionsForm(String email) {
         SeleniumActions.enter(txtEmail, email);
-        SeleniumActions.clickElement(sendInstructionButton);
+        SeleniumActions.clickElement(btnSendInstruction);
     }
 }

@@ -4,7 +4,7 @@ import com.nhantran.utils.SeleniumActions;
 import org.openqa.selenium.By;
 
 public class MailboxPage {
-    private By chbScrambleAddress = By.xpath("//input[@type='checkbox' and following-sibling::label[text()=' Scramble Address']]");
+    private By chkScrambleAddress = By.xpath("//input[@type='checkbox' and following-sibling::label[text()=' Scramble Address']]");
     private By txtMail = By.xpath("//span[@id='email-widget']");
     private By mailConfirm = By.xpath("//table[@id='email_table']//tr[contains(@class, 'mail')]//td[contains(.,'Please confirm your account')]");
     private By lnkConfirm = By.xpath("//*[@class='email_body']//a[contains(@href,'confirmationCode')]");
@@ -18,7 +18,7 @@ public class MailboxPage {
 
 
     public void clickScrambleAddressCheckbox() {
-        SeleniumActions.clickElement(chbScrambleAddress);
+        SeleniumActions.clickElement(chkScrambleAddress);
     }
 
     public String getMail() {

@@ -15,12 +15,12 @@ public class LogoutTest extends TestBase {
     private User validUser = new User(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
     @Test(description = "User is redirected to Home page after logging out")
-    public void TC006_RedirectingToHomepageAfterLoggingOut() {
+    public void TC006_RedirectToHomepageAfterLoggingOut() {
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(validUser);
         homePage.clickTab(RailwayTabs.FAQ);
         homePage.clickTab(RailwayTabs.LOG_OUT);
-        Assert.assertEquals(homePage.isHomePageTitleDisplayed(), Boolean.TRUE);
-        Assert.assertEquals(homePage.isTabDisplayed(RailwayTabs.LOG_OUT), Boolean.FALSE);
+        Assert.assertTrue(homePage.isHomePageTitleDisplayed());
+        Assert.assertFalse(homePage.isTabDisplayed(RailwayTabs.LOG_OUT));
     }
 }

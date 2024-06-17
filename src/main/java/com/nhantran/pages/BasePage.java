@@ -7,15 +7,15 @@ import org.openqa.selenium.NoSuchElementException;
 
 public class BasePage {
 
-    private String railwayTab = "//div[@id='menu']//li/a/span[text()='%s']";
+    private String dynMenuTabSelector = "//div[@id='menu']//li/a/span[text()='%s']";
 
     public void clickTab(RailwayTabs tabName) {
-        By tab = By.xpath(String.format(railwayTab, tabName.getValue()));
+        By tab = By.xpath(String.format(dynMenuTabSelector, tabName.getValue()));
         SeleniumActions.clickElement(tab);
     }
 
     public boolean isTabDisplayed(RailwayTabs tabName) {
-        By tab = By.xpath(String.format(railwayTab, tabName.getValue()));
+        By tab = By.xpath(String.format(dynMenuTabSelector, tabName.getValue()));
         try {
             return SeleniumActions.findElement(tab).isDisplayed();
         } catch (NoSuchElementException e){

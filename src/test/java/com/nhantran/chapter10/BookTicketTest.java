@@ -9,6 +9,7 @@ import com.nhantran.models.Tickets;
 import com.nhantran.models.User;
 import com.nhantran.pages.*;
 import com.nhantran.utils.Constants;
+import com.nhantran.utils.DateTimeHelper;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -23,22 +24,21 @@ public class BookTicketTest extends TestBase {
     private BookTicketSuccessPage bookTicketSuccessPage = new BookTicketSuccessPage();
     private User validUser = new User(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
 
-
     @DataProvider(name = "bookTicketData")
     public Object[][] dataTestTC012AndTC013() {
         return new Object[][]{
-                {new Tickets(bookTicketPage.calculateNextDate(12), RailwayStations.NHA_TRANG, RailwayStations.HUE, SeatTypes.SOFT_BED_AIR_CONDITIONER, 1)},
-                {new Tickets(bookTicketPage.calculateNextDate(25), RailwayStations.NHA_TRANG, RailwayStations.DA_NANG, SeatTypes.SOFT_SEAT_AIR_CONDITIONER, 5)}
+                {new Tickets(DateTimeHelper.calculateNextDate(12), RailwayStations.NHA_TRANG, RailwayStations.HUE, SeatTypes.SOFT_BED_AIR_CONDITIONER, 1)},
+                {new Tickets(DateTimeHelper.calculateNextDate(25), RailwayStations.NHA_TRANG, RailwayStations.DA_NANG, SeatTypes.SOFT_SEAT_AIR_CONDITIONER, 5)}
         };
     }
 
     @Test(dataProvider = "bookTicketData", description = "User can book 1 ticket or many tickets at a time")
-    public void TC012_013_SuccessToBookATicketAndManyTickets(Tickets ticket) {
+    public void TC012_013_BookSuccessfullyATicketAndManyTickets(Tickets ticket) {
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(validUser);
         homePage.clickTab(RailwayTabs.BOOK_TICKET);
         bookTicketPage.bookTicket(ticket);
-        Assert.assertEquals(bookTicketSuccessPage.isSuccessfulMessageDisplayed("Ticket booked successfully!"), Boolean.TRUE, "Success message does not show");
+        Assert.assertTrue(bookTicketSuccessPage.isSuccessfulMessageDisplayed("Ticket booked successfully!"), "Success message does not show");
         Assert.assertEquals(bookTicketSuccessPage.getDepartDate(), ticket.getDepartDate(), "Depart date not matching");
         Assert.assertEquals(bookTicketSuccessPage.getDepartStation(), ticket.getDepartStation().getValue(), "Depart station not matching");
         Assert.assertEquals(bookTicketSuccessPage.getArrivalStation(), ticket.getArrivalStation().getValue(), "Arrival station not matching");
@@ -47,12 +47,12 @@ public class BookTicketTest extends TestBase {
     }
 
     @Test(description = "User can check price of ticket from Timetable")
-    public void TC014_SuccessToCheckTicketPriceFromTimetable() {
+    public void TC014_CheckTicketPriceFromTimetable() {
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(validUser);
         homePage.clickTab(RailwayTabs.TIMETABLE);
         timetablePage.clickCheckPriceLink(RailwayStations.DA_NANG, RailwayStations.SAI_GON);
-        Assert.assertEquals(ticketPricePage.isPageTitleDisplayed("Ticket Price"), Boolean.TRUE, "Page does not load");
+        Assert.assertTrue(ticketPricePage.isPageTitleDisplayed("Ticket Price"), "Page does not load");
         Assert.assertEquals(ticketPricePage.getHeaderOfSeatPriceTable(), "Ticket price from Đà Nẵng to Sài Gòn", "Wrong ticket");
         Assert.assertEquals(ticketPricePage.getPriceOfSeatType("HS"), 310000, "Price of Hard seat is wrong");
         Assert.assertEquals(ticketPricePage.getPriceOfSeatType("SS"), 335000, "Price of Soft seat is wrong");
@@ -63,8 +63,8 @@ public class BookTicketTest extends TestBase {
     }
 
     @Test(description = "User can book ticket from Timetable")
-    public void TC015_SuccessToBookTicketFromTimetable() {
-        Tickets ticket = new Tickets(bookTicketPage.calculateNextDate(10), SeatTypes.HARD_SEAT, 5);
+    public void TC015_BookSuccessfullyTicketFromTimetable() {
+        Tickets ticket = new Tickets(DateTimeHelper.calculateNextDate(10), SeatTypes.HARD_SEAT, 5);
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(validUser);
         homePage.clickTab(RailwayTabs.TIMETABLE);
@@ -72,7 +72,7 @@ public class BookTicketTest extends TestBase {
         Assert.assertEquals(bookTicketPage.getStation(BookTicketComboBoxes.DEPART_STATION), RailwayStations.QUANG_NGAI.getValue(), "Depart station does not match");
         Assert.assertEquals(bookTicketPage.getStation(BookTicketComboBoxes.ARRIVE_STATION), RailwayStations.HUE.getValue(), "Arrive station does not match");
         bookTicketPage.bookTicket(ticket);
-        Assert.assertEquals(bookTicketSuccessPage.isSuccessfulMessageDisplayed("Ticket booked successfully!"), Boolean.TRUE, "Success message does not show");
+        Assert.assertTrue(bookTicketSuccessPage.isSuccessfulMessageDisplayed("Ticket booked successfully!"), "Success message does not show");
         Assert.assertEquals(bookTicketSuccessPage.getDepartDate(), ticket.getDepartDate(), "Depart date not matching");
         Assert.assertEquals(bookTicketSuccessPage.getDepartStation(), RailwayStations.QUANG_NGAI.getValue(), "Depart station not matching");
         Assert.assertEquals(bookTicketSuccessPage.getArrivalStation(), RailwayStations.HUE.getValue(), "Arrival station not matching");
