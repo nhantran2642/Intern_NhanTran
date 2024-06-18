@@ -1,7 +1,8 @@
 package com.nhantran.pages;
 
 import com.nhantran.enums.RailwayStations;
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.actions.BaseActions;
+import com.nhantran.utils.actions.LinkActions;
 import org.openqa.selenium.By;
 
 public class TimetablePage extends BasePage {
@@ -17,9 +18,9 @@ public class TimetablePage extends BasePage {
         clickLink(dynLinkBookTicket, departStation, arrivalStation);
     }
 
-    private void clickLink(String dynamicLinkType, RailwayStations departStation, RailwayStations arrivalStation){
+    private void clickLink(String dynamicLinkType, RailwayStations departStation, RailwayStations arrivalStation) {
         By link = By.xpath(String.format(dynamicLinkType, departStation.getValue(), arrivalStation.getValue()));
-        SeleniumActions.scrollToElement(link);
-        SeleniumActions.clickElement(link);
+        BaseActions.scrollToElement(link);
+        LinkActions.click(link);
     }
 }

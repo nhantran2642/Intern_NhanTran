@@ -9,7 +9,7 @@ public enum SeatTypes {
     SOFT_BED("Soft bed"),
     SOFT_BED_AIR_CONDITIONER("Soft bed with air conditioner");
 
-    private final String value;
+    private String value;
 
     SeatTypes(String value) {
         this.value = value;

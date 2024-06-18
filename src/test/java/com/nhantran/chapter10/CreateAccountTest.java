@@ -9,7 +9,7 @@ import com.nhantran.pages.RegisterPage;
 import com.nhantran.pages.RegistrationConfirmationPage;
 import com.nhantran.utils.Constants;
 import com.nhantran.utils.Messages;
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.actions.WindowActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -42,18 +42,18 @@ public class CreateAccountTest extends TestBase {
     @Test(description = "User create and activate account")
     public void TC009_CreateAndActiveSuccessfullyAnAccount() {
         homePage.clickCreateAccountHyperlink();
-        String railwayWindow = SeleniumActions.getWindowHandle();
-        SeleniumActions.openWebInNewTab(Constants.TEMPORARY_MAIL_URL);
-        mailboxPage.clickScrambleAddressCheckbox();
+        String railwayWindow = WindowActions.getWindowHandle();
+        WindowActions.openSiteInNewTab(Constants.TEMPORARY_MAIL_URL);
+        mailboxPage.uncheckScrambleAddressCheckbox();
         String mail = mailboxPage.getMail();
         newUser = new User(mail, "1234567890", "1234567890", "11111111111");
-        String mailWindow = SeleniumActions.getWindowHandle();
-        SeleniumActions.switchToWindow(railwayWindow);
+        String mailWindow = WindowActions.getWindowHandle();
+        WindowActions.switchToWindow(railwayWindow);
         registerPage.register(newUser);
-        SeleniumActions.switchToWindow(mailWindow);
-        SeleniumActions.refreshPage();
+        WindowActions.switchToWindow(mailWindow);
+        WindowActions.refresh();
         mailboxPage.clickConfirmLinkInMail();
-        SeleniumActions.switchToRemainingTab(railwayWindow, mailWindow);
+        WindowActions.switchToRemainingTab(railwayWindow, mailWindow);
         Assert.assertEquals(registrationConfirmationPage.getConfirmationSuccessMessage(), Messages.MSG_SUCCESS_CONFIRM_REGISTRATION, "The registration confirmation message does not match");
     }
 }

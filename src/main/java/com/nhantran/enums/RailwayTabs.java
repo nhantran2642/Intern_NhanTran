@@ -13,7 +13,7 @@ public enum RailwayTabs {
     CHANGE_PASSWORD("Change password"),
     LOG_OUT("Log out");
 
-    private final String value;
+    private String value;
 
     RailwayTabs(String value) {
         this.value = value;

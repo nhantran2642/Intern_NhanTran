@@ -1,24 +1,21 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.actions.BaseActions;
 import org.openqa.selenium.By;
 
 public class BookTicketSuccessPage extends BasePage {
 
-    private String celBookedTicketTable = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
-    private By hdrBookingSuccessfully = By.xpath("//h1");
-    private By lblTicketDepartStation = By.xpath(String.format(celBookedTicketTable, "Depart Station"));
-    private By lblTicketArrivalStation = By.xpath(String.format(celBookedTicketTable, "Arrive Station"));
-    private By lblTicketSeatType = By.xpath(String.format(celBookedTicketTable, "Seat Type"));
-    private By lblTicketDepartDate = By.xpath(String.format(celBookedTicketTable, "Depart Date"));
-    private By lblTicketAmount = By.xpath(String.format(celBookedTicketTable, "Amount"));
-
-    public String getSuccessfulMessage() {
-        return this.getInformation(hdrBookingSuccessfully);
-    }
+    private String dynCellBookedTicketTable = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
+    private String dynHeaderBookingSuccessfully = "//h1[text()='%s']";
+    private By lblTicketDepartStation = By.xpath(String.format(dynCellBookedTicketTable, "Depart Station"));
+    private By lblTicketArrivalStation = By.xpath(String.format(dynCellBookedTicketTable, "Arrive Station"));
+    private By lblTicketSeatType = By.xpath(String.format(dynCellBookedTicketTable, "Seat Type"));
+    private By lblTicketDepartDate = By.xpath(String.format(dynCellBookedTicketTable, "Depart Date"));
+    private By lblTicketAmount = By.xpath(String.format(dynCellBookedTicketTable, "Amount"));
 
     public boolean isSuccessfulMessageDisplayed(String message) {
-        return SeleniumActions.findElement(By.xpath(String.format("//h1[text()='%s']", message))).isDisplayed();
+        By successfulMessage = By.xpath(String.format(dynHeaderBookingSuccessfully, message));
+        return BaseActions.isElementDisplayed(successfulMessage);
     }
 
     public String getDepartStation() {
@@ -42,6 +39,6 @@ public class BookTicketSuccessPage extends BasePage {
     }
 
     private String getInformation(By element) {
-        return SeleniumActions.getElementText(element);
+        return BaseActions.getElementText(element);
     }
 }

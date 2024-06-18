@@ -1,6 +1,7 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.actions.ButtonActions;
+import com.nhantran.utils.actions.TextBoxActions;
 import org.openqa.selenium.By;
 
 public class ForgetPasswordPage extends BasePage {
@@ -8,7 +9,7 @@ public class ForgetPasswordPage extends BasePage {
     private By btnSendInstruction = By.xpath("//input[@type='submit']");
 
     public void submitPasswordResetInstructionsForm(String email) {
-        SeleniumActions.enter(txtEmail, email);
-        SeleniumActions.clickElement(btnSendInstruction);
+        TextBoxActions.enter(txtEmail, email);
+        ButtonActions.click(btnSendInstruction);
     }
 }

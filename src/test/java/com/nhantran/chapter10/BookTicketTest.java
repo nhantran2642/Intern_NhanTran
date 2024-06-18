@@ -79,6 +79,4 @@ public class BookTicketTest extends TestBase {
         Assert.assertEquals(bookTicketSuccessPage.getSeatType(), ticket.getSeatType().getValue(), "Seat type not matching");
         Assert.assertEquals(bookTicketSuccessPage.getTicketAmount(), ticket.getTicketAmount(), "Ticket amount not matching");
     }
-
-
 }

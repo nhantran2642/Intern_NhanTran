@@ -1,6 +1,8 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.actions.BaseActions;
+import com.nhantran.utils.actions.ButtonActions;
+import com.nhantran.utils.actions.TextBoxActions;
 import org.openqa.selenium.By;
 
 public class ResetPasswordPage extends BasePage {
@@ -14,24 +16,24 @@ public class ResetPasswordPage extends BasePage {
     private By lblMessageNextToConfirmPassword = By.xpath("//label[@for='confirmPassword' and @class='validation-error']");
 
     public void resetPassword(String newPassword, String confirmPassword) {
-        SeleniumActions.enter(txtNewPassword, newPassword);
-        SeleniumActions.enter(txtConfirmPassword, confirmPassword);
-        SeleniumActions.clickElement(btnResetPassword);
+        TextBoxActions.enter(txtNewPassword, newPassword);
+        TextBoxActions.enter(txtConfirmPassword, confirmPassword);
+        ButtonActions.click(btnResetPassword);
     }
 
     public boolean isChangePasswordFormDisplayed() {
-        return SeleniumActions.findElement(formChangePassword).isDisplayed();
+        return BaseActions.isElementDisplayed(formChangePassword);
     }
 
     public String getMessageAboveForm() {
-        return SeleniumActions.getElementText(lblMessageAboveForm);
+        return BaseActions.getElementText(lblMessageAboveForm);
     }
 
     public String getMessageNextToConfirmPassword() {
-        return SeleniumActions.getElementText(lblMessageNextToConfirmPassword);
+        return BaseActions.getElementText(lblMessageNextToConfirmPassword);
     }
 
     public String getResetTokenInTextBox() {
-        return SeleniumActions.findElement(txtResetToken).getAttribute("value");
+        return BaseActions.findElement(txtResetToken).getAttribute("value");
     }
 }

@@ -1,7 +1,9 @@
 package com.nhantran.pages;
 
 import com.nhantran.models.User;
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.actions.BaseActions;
+import com.nhantran.utils.actions.ButtonActions;
+import com.nhantran.utils.actions.TextBoxActions;
 import org.openqa.selenium.By;
 
 public class RegisterPage extends BasePage {
@@ -16,30 +18,30 @@ public class RegisterPage extends BasePage {
 
     public void register(User user) {
         if (user.getEmail() != null) {
-            SeleniumActions.enter(txtEmail, user.getEmail());
+            TextBoxActions.enter(txtEmail, user.getEmail());
         }
         if (user.getPassword() != null) {
-            SeleniumActions.enter(txtPassword, user.getPassword());
+            TextBoxActions.enter(txtPassword, user.getPassword());
         }
         if (user.getConfirmPassword() != null) {
-            SeleniumActions.enter(txtConfirmPassword, user.getConfirmPassword());
+            TextBoxActions.enter(txtConfirmPassword, user.getConfirmPassword());
         }
         if (user.getPid() != null) {
-            SeleniumActions.enter(txtPID, user.getPid());
+            TextBoxActions.enter(txtPID, user.getPid());
         }
-        SeleniumActions.scrollToElement(btnRegister);
-        SeleniumActions.clickElement(btnRegister);
+        BaseActions.scrollToElement(btnRegister);
+        ButtonActions.click(btnRegister);
     }
 
     public String getErrorMessageAboveRegisterForm() {
-        return SeleniumActions.getElementText(lblErrorAboveForm);
+        return BaseActions.getElementText(lblErrorAboveForm);
     }
 
     public String getErrorMessageNextToPassword() {
-        return SeleniumActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox, "password")));
+        return BaseActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox, "password")));
     }
 
     public String getErrorMessageNextToPID() {
-        return SeleniumActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox, "pid")));
+        return BaseActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox, "pid")));
     }
 }

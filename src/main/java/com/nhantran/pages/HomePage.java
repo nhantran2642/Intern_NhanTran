@@ -1,6 +1,7 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.actions.BaseActions;
+import com.nhantran.utils.actions.LinkActions;
 import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
@@ -9,15 +10,15 @@ public class HomePage extends BasePage {
     private By createAccountHyperlink = By.xpath("//a[text()='create an account']");
 
     public boolean isWelcomeUserMessageDisplayed() {
-        return SeleniumActions.findElement(welcomeUserMessage).isDisplayed();
+        return BaseActions.isElementDisplayed(welcomeUserMessage);
     }
 
     public boolean isHomePageTitleDisplayed() {
-        return SeleniumActions.findElement(title).isDisplayed();
+        return BaseActions.isElementDisplayed(title);
     }
 
-    public void clickCreateAccountHyperlink(){
-        SeleniumActions.clickElement(createAccountHyperlink);
+    public void clickCreateAccountHyperlink() {
+        LinkActions.click(createAccountHyperlink);
     }
 
 }

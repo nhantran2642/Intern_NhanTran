@@ -9,4 +9,5 @@ public class Constants {
     public static final String INVALID_PASSWORD = "0123456789";
     public static final String INACTIVE_USERNAME = "nhantrannotactive@grr.la";
     public static final String INACTIVE_PASSWORD = "1234567890";
+    public static final int WAIT_TIME = 25;
 }

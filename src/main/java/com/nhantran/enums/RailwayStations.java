@@ -8,7 +8,7 @@ public enum RailwayStations {
     HUE("Huế"),
     QUANG_NGAI("Quảng Ngãi");
 
-    private final String value;
+    private String value;
 
     RailwayStations(String value) {
         this.value = value;

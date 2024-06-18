@@ -8,7 +8,7 @@ public enum BookTicketComboBoxes {
     SEAT_TYPE("SeatType"),
     AMOUNT("TicketAmount");
 
-    private final String value;
+    private String value;
 
     BookTicketComboBoxes(String value) {
         this.value = value;
