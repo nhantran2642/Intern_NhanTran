@@ -29,7 +29,7 @@ public class MyTicketPage extends BasePage {
         ButtonActions.click(btnCancelTicket);
     }
 
-    public void acceptCancelTicket() {
+    public void acceptToCancelTicket() {
         AlertActions.acceptAlert();
     }
 

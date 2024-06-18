@@ -30,7 +30,7 @@ public class CancelTicketTest extends TestBase {
         bookTicketPage.bookTicket(ticket);
         bookTicketSuccessPage.clickTab(RailwayTabs.MY_TICKET);
         myTicketPage.cancelTicket(ticket);
-        myTicketPage.acceptCancelTicket();
+        myTicketPage.acceptToCancelTicket();
         Assert.assertFalse(myTicketPage.isCancelledTicketDisplayed(ticket), "Ticket still display");
     }
 }
