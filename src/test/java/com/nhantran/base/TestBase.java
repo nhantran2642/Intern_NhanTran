@@ -3,7 +3,9 @@ package com.nhantran.base;
 import com.nhantran.utils.Constants;
 import com.nhantran.utils.DriverManager;
 import com.nhantran.utils.PropertiesFileReader;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 public class TestBase {

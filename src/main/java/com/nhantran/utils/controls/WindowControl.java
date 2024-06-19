@@ -1,12 +1,11 @@
-package com.nhantran.utils.actions;
+package com.nhantran.utils.controls;
 
 import com.nhantran.utils.DriverManager;
 import org.openqa.selenium.WindowType;
 
 import java.util.Set;
 
-public class WindowActions {
-
+public class WindowControl {
     public static void refresh() {
         DriverManager.driver.navigate().refresh();
     }

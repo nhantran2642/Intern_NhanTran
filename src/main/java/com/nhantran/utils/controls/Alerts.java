@@ -1,9 +1,9 @@
-package com.nhantran.utils.actions;
+package com.nhantran.utils.controls;
 
 import com.nhantran.utils.DriverManager;
 
-public class AlertActions {
-    public static void acceptAlert() {
+public class Alerts {
+    public void acceptAlert() {
         DriverManager.driver.switchTo().alert().accept();
     }
 }

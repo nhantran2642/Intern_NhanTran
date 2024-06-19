@@ -35,10 +35,14 @@ public class DriverManager {
     }
 
     public static void closeDriver() {
-        driver.close();
+        if (driver != null) {
+            driver.close();
+        }
     }
 
     public static void quitDriver() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

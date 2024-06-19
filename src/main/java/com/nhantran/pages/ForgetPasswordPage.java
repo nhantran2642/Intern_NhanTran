@@ -1,15 +1,15 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.actions.ButtonActions;
-import com.nhantran.utils.actions.TextBoxActions;
+import com.nhantran.utils.controls.Buttons;
+import com.nhantran.utils.controls.TextBoxes;
 import org.openqa.selenium.By;
 
 public class ForgetPasswordPage extends BasePage {
-    private By txtEmail = By.xpath("//input[@id='email']");
-    private By btnSendInstruction = By.xpath("//input[@type='submit']");
+    private TextBoxes txtEmail = new TextBoxes(By.xpath("//input[@id='email']"));
+    private Buttons btnSendInstruction = new Buttons(By.xpath("//input[@type='submit']"));
 
     public void submitPasswordResetInstructionsForm(String email) {
-        TextBoxActions.enter(txtEmail, email);
-        ButtonActions.click(btnSendInstruction);
+        txtEmail.enter(email);
+        btnSendInstruction.click();
     }
 }

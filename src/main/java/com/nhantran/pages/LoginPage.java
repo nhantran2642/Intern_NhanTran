@@ -1,31 +1,28 @@
 package com.nhantran.pages;
 
 import com.nhantran.models.User;
-import com.nhantran.utils.actions.BaseActions;
-import com.nhantran.utils.actions.ButtonActions;
-import com.nhantran.utils.actions.LinkActions;
-import com.nhantran.utils.actions.TextBoxActions;
+import com.nhantran.utils.controls.*;
 import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
 
-    private By txtUsername = By.id("username");
-    private By txtPassword = By.id("password");
-    private By btnLogin = By.xpath("//input[@value='login']");
-    private By lblFormErrorMessage = By.xpath("//p[@class='message error LoginForm']");
-    private By lnkForgotPassword = By.xpath("//a[text()='Forgot Password page']");
+    private TextBoxes txtUsername = new TextBoxes(By.id("username"));
+    private TextBoxes txtPassword = new TextBoxes(By.id("password"));
+    private Buttons btnLogin = new Buttons(By.xpath("//input[@value='login']"));
+    private Labels lblFormErrorMessage = new Labels(By.xpath("//p[@class='message error LoginForm']"));
+    private Links lnkForgotPassword = new Links(By.xpath("//a[text()='Forgot Password page']"));
 
     public void login(User user) {
         if (user.getEmail() != null) {
-            TextBoxActions.clear(txtUsername);
-            TextBoxActions.enter(txtUsername, user.getEmail());
+            txtUsername.clear();
+            txtUsername.enter(user.getEmail());
         }
         if (user.getPassword() != null) {
-            TextBoxActions.clear(txtPassword);
-            TextBoxActions.enter(txtPassword, user.getPassword());
+            txtPassword.clear();
+            txtPassword.enter(user.getPassword());
         }
-        BaseActions.scrollToElement(btnLogin);
-        ButtonActions.click(btnLogin);
+        btnLogin.scrollIntoView();
+        btnLogin.click();
     }
 
     public void loginManyTimes(User user, Integer numberOfTimes) {
@@ -34,16 +31,12 @@ public class LoginPage extends BasePage {
         }
     }
 
-    public boolean isLoginErrorMessageDisplayed() {
-        return BaseActions.isElementDisplayed(lblFormErrorMessage);
-    }
-
     public String getLoginErrorMessage() {
-        return BaseActions.getElementText(lblFormErrorMessage);
+        return lblFormErrorMessage.getText();
     }
 
     public void clickForgotPasswordLink() {
-        LinkActions.click(lnkForgotPassword);
+        lnkForgotPassword.click();
     }
 
 }

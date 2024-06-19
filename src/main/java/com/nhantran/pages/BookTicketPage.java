@@ -4,21 +4,20 @@ import com.nhantran.enums.BookTicketComboBoxes;
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.SeatTypes;
 import com.nhantran.models.Tickets;
-import com.nhantran.utils.actions.BaseActions;
-import com.nhantran.utils.actions.ButtonActions;
-import com.nhantran.utils.actions.ComboBoxActions;
+import com.nhantran.utils.controls.Buttons;
+import com.nhantran.utils.controls.ComboBoxes;
 import org.openqa.selenium.By;
 
 import java.util.EnumSet;
 
 public class BookTicketPage extends BasePage {
     private String dynCbbBookTicket = "//select[@name='%s']";
-    private String btnBookTicket = "//input[@value='Book ticket']";
+    By btnBookTicket = By.xpath("//input[@value='Book ticket']");
 
     private void selectCombobox(BookTicketComboBoxes comboBoxName, String value) {
-        By cbbBookTicket = By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue()));
-        BaseActions.scrollToElement(cbbBookTicket);
-        ComboBoxActions.select(cbbBookTicket, value);
+        ComboBoxes cbbBookTicket = new ComboBoxes(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
+        cbbBookTicket.scrollIntoView();
+        cbbBookTicket.select(value);
     }
 
     private void selectDepartDate(String date) {
@@ -48,8 +47,9 @@ public class BookTicketPage extends BasePage {
     }
 
     private void clickBookTicketButton() {
-        BaseActions.scrollToElement(By.xpath(btnBookTicket));
-        ButtonActions.click(By.xpath(btnBookTicket));
+        Buttons btn = new Buttons(btnBookTicket);
+        btn.scrollIntoView();
+        btn.click();
     }
 
     public void bookTicket(Tickets ticket) {
@@ -68,7 +68,8 @@ public class BookTicketPage extends BasePage {
         if (!ALLOWED_STATIONS.contains(comboBoxName)) {
             throw new IllegalArgumentException("Invalid combobox: " + comboBoxName);
         }
-        return ComboBoxActions.getSelectedOption(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
+        ComboBoxes comboBox = new ComboBoxes(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
+        return comboBox.getSelectedOption();
     }
 
 

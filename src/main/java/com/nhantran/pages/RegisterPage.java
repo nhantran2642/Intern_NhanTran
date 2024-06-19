@@ -1,47 +1,49 @@
 package com.nhantran.pages;
 
 import com.nhantran.models.User;
-import com.nhantran.utils.actions.BaseActions;
-import com.nhantran.utils.actions.ButtonActions;
-import com.nhantran.utils.actions.TextBoxActions;
+import com.nhantran.utils.controls.Buttons;
+import com.nhantran.utils.controls.Labels;
+import com.nhantran.utils.controls.TextBoxes;
 import org.openqa.selenium.By;
 
 public class RegisterPage extends BasePage {
 
-    private By txtEmail = By.id("email");
-    private By txtPassword = By.id("password");
-    private By txtConfirmPassword = By.id("confirmPassword");
-    private By txtPID = By.id("pid");
-    private By btnRegister = By.xpath("//input[@value='Register']");
-    private By lblErrorAboveForm = By.xpath("//p[@class='message error']");
+    private TextBoxes txtEmail = new TextBoxes(By.id("email"));
+    private TextBoxes txtPassword = new TextBoxes(By.id("password"));
+    private TextBoxes txtConfirmPassword = new TextBoxes(By.id("confirmPassword"));
+    private TextBoxes txtPID = new TextBoxes(By.id("pid"));
+    private Buttons btnRegister = new Buttons(By.xpath("//input[@value='Register']"));
+    private Labels lblErrorAboveForm = new Labels(By.xpath("//p[@class='message error']"));
     private String lblErrorNextToTextBox = "//label[@class='validation-error' and @for='%s']";
 
     public void register(User user) {
         if (user.getEmail() != null) {
-            TextBoxActions.enter(txtEmail, user.getEmail());
+            txtEmail.enter(user.getEmail());
         }
         if (user.getPassword() != null) {
-            TextBoxActions.enter(txtPassword, user.getPassword());
+            txtPassword.enter(user.getPassword());
         }
         if (user.getConfirmPassword() != null) {
-            TextBoxActions.enter(txtConfirmPassword, user.getConfirmPassword());
+            txtConfirmPassword.enter(user.getConfirmPassword());
         }
         if (user.getPid() != null) {
-            TextBoxActions.enter(txtPID, user.getPid());
+            txtPID.enter(user.getPid());
         }
-        BaseActions.scrollToElement(btnRegister);
-        ButtonActions.click(btnRegister);
+        btnRegister.scrollIntoView();
+        btnRegister.click();
     }
 
     public String getErrorMessageAboveRegisterForm() {
-        return BaseActions.getElementText(lblErrorAboveForm);
+        return lblErrorAboveForm.getText();
     }
 
     public String getErrorMessageNextToPassword() {
-        return BaseActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox, "password")));
+        Labels lblErrorNextToPassword = new Labels(By.xpath(String.format(lblErrorNextToTextBox, "password")));
+        return lblErrorNextToPassword.getText();
     }
 
     public String getErrorMessageNextToPID() {
-        return BaseActions.getElementText(By.xpath(String.format(lblErrorNextToTextBox, "pid")));
+        Labels lblErrorNextToPID = new Labels(By.xpath(String.format(lblErrorNextToTextBox, "pid")));
+        return lblErrorNextToPID.getText();
     }
 }
