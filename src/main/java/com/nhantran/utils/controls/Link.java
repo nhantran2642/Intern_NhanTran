@@ -2,9 +2,8 @@ package com.nhantran.utils.controls;
 
 import org.openqa.selenium.By;
 
-public class Buttons extends BaseControl {
-
-    public Buttons(By locator) {
+public class Link extends BaseControl {
+    public Link(By locator) {
         super(locator);
     }
 

@@ -1,6 +1,6 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.controls.Labels;
+import com.nhantran.utils.controls.Label;
 import org.openqa.selenium.By;
 
 public class BookTicketSuccessPage extends BasePage {
@@ -14,32 +14,32 @@ public class BookTicketSuccessPage extends BasePage {
     private By lblTicketAmount = By.xpath(String.format(dynCellBookedTicketTable, "Amount"));
 
     public boolean isSuccessfulMessageDisplayed(String message) {
-        Labels successfulMessage = new Labels(By.xpath(String.format(dynHeaderBookingSuccessfully, message)));
+        Label successfulMessage = new Label(By.xpath(String.format(dynHeaderBookingSuccessfully, message)));
         return successfulMessage.isDisplayed();
     }
 
     public String getDepartStation() {
-        Labels tkDepartStation = new Labels(lblTicketDepartStation);
+        Label tkDepartStation = new Label(lblTicketDepartStation);
         return tkDepartStation.getText();
     }
 
     public String getArrivalStation() {
-        Labels tkArrivalStation = new Labels(lblTicketArrivalStation);
+        Label tkArrivalStation = new Label(lblTicketArrivalStation);
         return tkArrivalStation.getText();
     }
 
     public String getSeatType() {
-        Labels tkSeatType = new Labels(lblTicketSeatType);
+        Label tkSeatType = new Label(lblTicketSeatType);
         return tkSeatType.getText();
     }
 
     public String getDepartDate() {
-        Labels tkDepartDate = new Labels(lblTicketDepartDate);
+        Label tkDepartDate = new Label(lblTicketDepartDate);
         return tkDepartDate.getText();
     }
 
     public Integer getTicketAmount() {
-        Labels tkAmount = new Labels(lblTicketAmount);
+        Label tkAmount = new Label(lblTicketAmount);
         return Integer.parseInt(tkAmount.getText());
     }
 }

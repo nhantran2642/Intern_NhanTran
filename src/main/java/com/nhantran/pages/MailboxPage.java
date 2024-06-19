@@ -4,17 +4,17 @@ import com.nhantran.utils.controls.*;
 import org.openqa.selenium.By;
 
 public class MailboxPage {
-    private Checkboxes chkScrambleAddress = new Checkboxes(By.xpath("//input[@type='checkbox' and following-sibling::label[text()=' Scramble Address']]"));
-    private Labels tmpMail = new Labels(By.xpath("//span[@id='email-widget']"));
-    private Labels mailContent = new Labels(By.xpath("//div[@class='email_body']"));
-    private Links mailConfirm = new Links(By.xpath("//table[@id='email_table']//tr[contains(@class, 'mail')]//td[contains(.,'Please confirm your account')]"));
-    private Links lnkConfirm = new Links(By.xpath("//*[@class='email_body']//a[contains(@href,'confirmationCode')]"));
-    private Links lnkResetPassword = new Links(By.xpath("//*[@class='email_body']//a[contains(@href,'PasswordReset')]"));
-    private Links mailResetPassword = new Links(By.xpath("//tr[contains(@class,'email_unread')]//td[contains(.,'Please reset your password')]"));
-    private Buttons btnMailUsername = new Buttons(By.xpath("//span[@id='inbox-id']"));
-    private Buttons btnSetMailUsername = new Buttons(By.xpath("//span[@id='inbox-id']/button[text()='Set']"));
-    private TextBoxes txtMailUsername = new TextBoxes(By.xpath("//span[@id='inbox-id']/input[@type='text']"));
-    private ComboBoxes cbbMailDomain = new ComboBoxes(By.xpath("//select[@id='gm-host-select']"));
+    private CheckBox chkScrambleAddress = new CheckBox(By.xpath("//input[@type='checkbox' and following-sibling::label[text()=' Scramble Address']]"));
+    private Label tmpMail = new Label(By.xpath("//span[@id='email-widget']"));
+    private Label mailContent = new Label(By.xpath("//div[@class='email_body']"));
+    private Link mailConfirm = new Link(By.xpath("//table[@id='email_table']//tr[contains(@class, 'mail')]//td[contains(.,'Please confirm your account')]"));
+    private Link lnkConfirm = new Link(By.xpath("//*[@class='email_body']//a[contains(@href,'confirmationCode')]"));
+    private Link lnkResetPassword = new Link(By.xpath("//*[@class='email_body']//a[contains(@href,'PasswordReset')]"));
+    private Link mailResetPassword = new Link(By.xpath("//tr[contains(@class,'email_unread')]//td[contains(.,'Please reset your password')]"));
+    private Button btnMailUsername = new Button(By.xpath("//span[@id='inbox-id']"));
+    private Button btnSetMailUsername = new Button(By.xpath("//span[@id='inbox-id']/button[text()='Set']"));
+    private TextBox txtMailUsername = new TextBox(By.xpath("//span[@id='inbox-id']/input[@type='text']"));
+    private ComboBox cbbMailDomain = new ComboBox(By.xpath("//select[@id='gm-host-select']"));
 
 
     public void uncheckScrambleAddressCheckbox() {

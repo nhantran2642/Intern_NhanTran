@@ -3,8 +3,8 @@ package com.nhantran.utils.controls;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-public class ComboBoxes extends BaseControl {
-    public ComboBoxes(By locator) {
+public class ComboBox extends BaseControl {
+    public ComboBox(By locator) {
         super(locator);
     }
 

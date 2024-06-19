@@ -4,18 +4,18 @@ import com.nhantran.enums.BookTicketComboBoxes;
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.SeatTypes;
 import com.nhantran.models.Tickets;
-import com.nhantran.utils.controls.Buttons;
-import com.nhantran.utils.controls.ComboBoxes;
+import com.nhantran.utils.controls.Button;
+import com.nhantran.utils.controls.ComboBox;
 import org.openqa.selenium.By;
 
 import java.util.EnumSet;
 
 public class BookTicketPage extends BasePage {
     private String dynCbbBookTicket = "//select[@name='%s']";
-    Buttons btnBookTicket = new Buttons(By.xpath("//input[@value='Book ticket']"));
+    Button btnBookTicket = new Button(By.xpath("//input[@value='Book ticket']"));
 
     private void selectCombobox(BookTicketComboBoxes comboBoxName, String value) {
-        ComboBoxes cbbBookTicket = new ComboBoxes(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
+        ComboBox cbbBookTicket = new ComboBox(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
         cbbBookTicket.scrollIntoView();
         cbbBookTicket.select(value);
     }
@@ -67,7 +67,7 @@ public class BookTicketPage extends BasePage {
         if (!ALLOWED_STATIONS.contains(comboBoxName)) {
             throw new IllegalArgumentException("Invalid combobox: " + comboBoxName);
         }
-        ComboBoxes comboBox = new ComboBoxes(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
+        ComboBox comboBox = new ComboBox(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
         return comboBox.getSelectedOption();
     }
 

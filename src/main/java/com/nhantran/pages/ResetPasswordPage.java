@@ -1,20 +1,20 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.controls.Buttons;
-import com.nhantran.utils.controls.Forms;
-import com.nhantran.utils.controls.Labels;
-import com.nhantran.utils.controls.TextBoxes;
+import com.nhantran.utils.controls.Button;
+import com.nhantran.utils.controls.Form;
+import com.nhantran.utils.controls.Label;
+import com.nhantran.utils.controls.TextBox;
 import org.openqa.selenium.By;
 
 public class ResetPasswordPage extends BasePage {
 
-    private TextBoxes txtNewPassword = new TextBoxes(By.xpath("//input[@type='password' and @id='newPassword']"));
-    private TextBoxes txtConfirmPassword = new TextBoxes(By.xpath("//input[@type='password' and @id='confirmPassword']"));
-    private TextBoxes txtResetToken = new TextBoxes(By.xpath("//input[@id='resetToken']"));
-    private Buttons btnResetPassword = new Buttons(By.xpath("//input[@type='submit' and @value='Reset Password']"));
-    private Forms formChangePassword = new Forms(By.xpath("//form[//*[text()='Password Change Form']]"));
-    private Labels lblMessageAboveForm = new Labels(By.xpath("//p[contains(@class,'message')]"));
-    private Labels lblMessageNextToConfirmPassword = new Labels(By.xpath("//label[@for='confirmPassword' and @class='validation-error']"));
+    private TextBox txtNewPassword = new TextBox(By.xpath("//input[@type='password' and @id='newPassword']"));
+    private TextBox txtConfirmPassword = new TextBox(By.xpath("//input[@type='password' and @id='confirmPassword']"));
+    private TextBox txtResetToken = new TextBox(By.xpath("//input[@id='resetToken']"));
+    private Button btnResetPassword = new Button(By.xpath("//input[@type='submit' and @value='Reset Password']"));
+    private Form formChangePassword = new Form(By.xpath("//form[//*[text()='Password Change Form']]"));
+    private Label lblMessageAboveForm = new Label(By.xpath("//p[contains(@class,'message')]"));
+    private Label lblMessageNextToConfirmPassword = new Label(By.xpath("//label[@for='confirmPassword' and @class='validation-error']"));
 
     public void resetPassword(String newPassword, String confirmPassword) {
         txtNewPassword.enter(newPassword);

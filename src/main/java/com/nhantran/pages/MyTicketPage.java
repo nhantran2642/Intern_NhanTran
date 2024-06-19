@@ -1,9 +1,9 @@
 package com.nhantran.pages;
 
 import com.nhantran.models.Tickets;
-import com.nhantran.utils.controls.Alerts;
-import com.nhantran.utils.controls.Buttons;
-import com.nhantran.utils.controls.Labels;
+import com.nhantran.utils.controls.Alert;
+import com.nhantran.utils.controls.Button;
+import com.nhantran.utils.controls.Label;
 import org.openqa.selenium.By;
 
 public class MyTicketPage extends BasePage {
@@ -24,17 +24,17 @@ public class MyTicketPage extends BasePage {
             "td[count(//tr/th[text()='Amount']/preceding-sibling::th)+1][text()='%d']]";
 
     public void cancelTicket(Tickets ticket) {
-        Buttons btnCancelTicket = new Buttons(By.xpath(String.format(dynButtonCancelTicket, ticket.getDepartStation().getValue(), ticket.getArrivalStation().getValue(), ticket.getSeatType().getValue(), ticket.getDepartDate(), ticket.getTicketAmount())));
+        Button btnCancelTicket = new Button(By.xpath(String.format(dynButtonCancelTicket, ticket.getDepartStation().getValue(), ticket.getArrivalStation().getValue(), ticket.getSeatType().getValue(), ticket.getDepartDate(), ticket.getTicketAmount())));
         btnCancelTicket.click();
     }
 
     public void acceptToCancelTicket() {
-        Alerts alert = new Alerts();
+        Alert alert = new Alert();
         alert.acceptAlert();
     }
 
     public boolean isCancelledTicketDisplayed(Tickets ticket) {
-        Labels tkRow = new Labels(By.xpath(String.format(dynTicketRow, ticket.getDepartStation().getValue(), ticket.getArrivalStation().getValue(), ticket.getSeatType().getValue(), ticket.getDepartDate(), ticket.getTicketAmount())));
+        Label tkRow = new Label(By.xpath(String.format(dynTicketRow, ticket.getDepartStation().getValue(), ticket.getArrivalStation().getValue(), ticket.getSeatType().getValue(), ticket.getDepartDate(), ticket.getTicketAmount())));
         return tkRow.isDisplayed();
 
     }

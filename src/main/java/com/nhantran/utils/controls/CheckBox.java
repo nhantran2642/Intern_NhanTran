@@ -2,8 +2,8 @@ package com.nhantran.utils.controls;
 
 import org.openqa.selenium.By;
 
-public class Checkboxes extends BaseControl {
-    public Checkboxes(By locator) {
+public class CheckBox extends BaseControl {
+    public CheckBox(By locator) {
         super(locator);
     }
 

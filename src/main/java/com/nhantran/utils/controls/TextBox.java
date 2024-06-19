@@ -2,8 +2,8 @@ package com.nhantran.utils.controls;
 
 import org.openqa.selenium.By;
 
-public class TextBoxes extends BaseControl {
-    public TextBoxes(By locator) {
+public class TextBox extends BaseControl {
+    public TextBox(By locator) {
         super(locator);
     }
 

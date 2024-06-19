@@ -1,19 +1,19 @@
 package com.nhantran.pages;
 
 import com.nhantran.models.User;
-import com.nhantran.utils.controls.Buttons;
-import com.nhantran.utils.controls.Labels;
-import com.nhantran.utils.controls.TextBoxes;
+import com.nhantran.utils.controls.Button;
+import com.nhantran.utils.controls.Label;
+import com.nhantran.utils.controls.TextBox;
 import org.openqa.selenium.By;
 
 public class RegisterPage extends BasePage {
 
-    private TextBoxes txtEmail = new TextBoxes(By.id("email"));
-    private TextBoxes txtPassword = new TextBoxes(By.id("password"));
-    private TextBoxes txtConfirmPassword = new TextBoxes(By.id("confirmPassword"));
-    private TextBoxes txtPID = new TextBoxes(By.id("pid"));
-    private Buttons btnRegister = new Buttons(By.xpath("//input[@value='Register']"));
-    private Labels lblErrorAboveForm = new Labels(By.xpath("//p[@class='message error']"));
+    private TextBox txtEmail = new TextBox(By.id("email"));
+    private TextBox txtPassword = new TextBox(By.id("password"));
+    private TextBox txtConfirmPassword = new TextBox(By.id("confirmPassword"));
+    private TextBox txtPID = new TextBox(By.id("pid"));
+    private Button btnRegister = new Button(By.xpath("//input[@value='Register']"));
+    private Label lblErrorAboveForm = new Label(By.xpath("//p[@class='message error']"));
     private String lblErrorNextToTextBox = "//label[@class='validation-error' and @for='%s']";
 
     public void register(User user) {
@@ -38,12 +38,12 @@ public class RegisterPage extends BasePage {
     }
 
     public String getErrorMessageNextToPassword() {
-        Labels lblErrorNextToPassword = new Labels(By.xpath(String.format(lblErrorNextToTextBox, "password")));
+        Label lblErrorNextToPassword = new Label(By.xpath(String.format(lblErrorNextToTextBox, "password")));
         return lblErrorNextToPassword.getText();
     }
 
     public String getErrorMessageNextToPID() {
-        Labels lblErrorNextToPID = new Labels(By.xpath(String.format(lblErrorNextToTextBox, "pid")));
+        Label lblErrorNextToPID = new Label(By.xpath(String.format(lblErrorNextToTextBox, "pid")));
         return lblErrorNextToPID.getText();
     }
 }

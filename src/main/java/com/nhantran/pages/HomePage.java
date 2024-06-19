@@ -1,13 +1,13 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.controls.Labels;
-import com.nhantran.utils.controls.Links;
+import com.nhantran.utils.controls.Label;
+import com.nhantran.utils.controls.Link;
 import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
-    private Labels welcomeUserMessage = new Labels(By.xpath("//div[@id='banner']//strong"));
-    private Labels title = new Labels(By.xpath("//h1"));
-    private Links createAccountHyperlink = new Links(By.xpath("//a[text()='create an account']"));
+    private Label welcomeUserMessage = new Label(By.xpath("//div[@id='banner']//strong"));
+    private Label title = new Label(By.xpath("//h1"));
+    private Link createAccountHyperlink = new Link(By.xpath("//a[text()='create an account']"));
 
     public boolean isWelcomeUserMessageDisplayed() {
         return welcomeUserMessage.isDisplayed();

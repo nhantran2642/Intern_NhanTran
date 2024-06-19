@@ -6,11 +6,11 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
 
-    private TextBoxes txtUsername = new TextBoxes(By.id("username"));
-    private TextBoxes txtPassword = new TextBoxes(By.id("password"));
-    private Buttons btnLogin = new Buttons(By.xpath("//input[@value='login']"));
-    private Labels lblFormErrorMessage = new Labels(By.xpath("//p[@class='message error LoginForm']"));
-    private Links lnkForgotPassword = new Links(By.xpath("//a[text()='Forgot Password page']"));
+    private TextBox txtUsername = new TextBox(By.id("username"));
+    private TextBox txtPassword = new TextBox(By.id("password"));
+    private Button btnLogin = new Button(By.xpath("//input[@value='login']"));
+    private Label lblFormErrorMessage = new Label(By.xpath("//p[@class='message error LoginForm']"));
+    private Link lnkForgotPassword = new Link(By.xpath("//a[text()='Forgot Password page']"));
 
     public void login(User user) {
         if (user.getEmail() != null) {
