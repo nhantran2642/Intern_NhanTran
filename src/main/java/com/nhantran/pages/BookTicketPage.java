@@ -12,7 +12,7 @@ import java.util.EnumSet;
 
 public class BookTicketPage extends BasePage {
     private String dynCbbBookTicket = "//select[@name='%s']";
-    By btnBookTicket = By.xpath("//input[@value='Book ticket']");
+    Buttons btnBookTicket = new Buttons(By.xpath("//input[@value='Book ticket']"));
 
     private void selectCombobox(BookTicketComboBoxes comboBoxName, String value) {
         ComboBoxes cbbBookTicket = new ComboBoxes(By.xpath(String.format(dynCbbBookTicket, comboBoxName.getValue())));
@@ -47,9 +47,8 @@ public class BookTicketPage extends BasePage {
     }
 
     private void clickBookTicketButton() {
-        Buttons btn = new Buttons(btnBookTicket);
-        btn.scrollIntoView();
-        btn.click();
+        btnBookTicket.scrollIntoView();
+        btnBookTicket.click();
     }
 
     public void bookTicket(Tickets ticket) {
