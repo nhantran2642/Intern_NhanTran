@@ -1,9 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="RegressionSuite" verbose="1">
+
+    <listeners>
+        <listener class-name="com.nhantran.listeners.TestListener"></listener>
+    </listeners>
     <test name="Testing">
         <classes>
-            <class name="com.nhantran.chapter8.BookTicketTest"/>
             <class name="com.nhantran.chapter10.LoginTest"/>
             <class name="com.nhantran.chapter10.LogoutTest"/>
             <class name="com.nhantran.chapter10.CreateAccountTest"/>
