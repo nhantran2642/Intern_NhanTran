@@ -1,4 +1,4 @@
-package com.nhantran.utils;
+package com.nhantran.common;
 
 public class Messages {
 

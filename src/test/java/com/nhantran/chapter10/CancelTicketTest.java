@@ -7,8 +7,8 @@ import com.nhantran.enums.SeatTypes;
 import com.nhantran.models.Tickets;
 import com.nhantran.models.User;
 import com.nhantran.pages.*;
-import com.nhantran.utils.Constants;
-import com.nhantran.utils.DateTimeHelper;
+import com.nhantran.common.Constants;
+import com.nhantran.utils.helpers.DateTimeHelper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

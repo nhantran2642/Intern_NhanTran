@@ -5,7 +5,7 @@ import com.nhantran.enums.RailwayTabs;
 import com.nhantran.models.User;
 import com.nhantran.pages.HomePage;
 import com.nhantran.pages.LoginPage;
-import com.nhantran.utils.Constants;
+import com.nhantran.common.Constants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

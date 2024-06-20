@@ -1,6 +1,6 @@
 package com.nhantran.utils.controls;
 
-import com.nhantran.utils.Constants;
+import com.nhantran.common.Constants;
 import com.nhantran.utils.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
