@@ -19,8 +19,8 @@ public class CreateAccountTest extends TestBase {
     private RegisterPage registerPage = new RegisterPage();
     private MailboxPage mailboxPage = new MailboxPage();
     private RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage();
-    private User alreadyRegistedUser = new User(Constants.VALID_USERNAME, "0987654321", "0987654321", "000000000000");
-    private User emptyPasswordPidUser = new User(Constants.VALID_USERNAME, null, null, null);
+    private User alreadyRegistedUser = User.getAlreadyRegisteredUser();
+    private User emptyPasswordPidUser = User.getEmptyPasswordPidUser();
     private User newUser;
 
     @Test(description = "User can't create account with an already in-use email")

@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class LogoutTest extends TestBase {
     private HomePage homePage = new HomePage();
     private LoginPage loginPage = new LoginPage();
-    private User validUser = new User(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
+    private User validUser = User.getValidUser();
 
     @Test(description = "User is redirected to Home page after logging out")
     public void TC006_RedirectToHomepageAfterLoggingOut() {

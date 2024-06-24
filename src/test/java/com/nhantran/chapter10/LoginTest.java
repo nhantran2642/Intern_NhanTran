@@ -7,6 +7,9 @@ import com.nhantran.pages.HomePage;
 import com.nhantran.pages.LoginPage;
 import com.nhantran.common.Constants;
 import com.nhantran.common.Messages;
+import com.nhantran.utils.JsonFileReader;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -15,9 +18,11 @@ public class LoginTest extends TestBase {
 
     private HomePage homePage = new HomePage();
     private LoginPage loginPage = new LoginPage();
-    private User validUser = new User(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
-    private User invalidUser = new User(Constants.VALID_USERNAME, Constants.INVALID_PASSWORD);
-    private User inactiveUser = new User(Constants.INACTIVE_USERNAME, Constants.INACTIVE_PASSWORD);
+
+    private User validUser = User.getValidUser();
+    private User invalidUser = User.getInvalidUser();
+    private User blankEmailUser = User.getBlankEmailUser();
+    private User inactiveUser = User.getInactivatedUser();
 
     @Test(description = "User can log into Railway with valid username and password")
     public void TC001_LoginSuccessfullyWithValidAccount() {
@@ -30,7 +35,7 @@ public class LoginTest extends TestBase {
     @DataProvider(name = "loginData")
     public Object[][] dataTestTC002AndTC003() {
         return new Object[][]{
-                {new User(null, Constants.VALID_PASSWORD), Messages.MSG_ERROR_ABOVE_LOGIN_FORM},
+                {blankEmailUser, Messages.MSG_ERROR_ABOVE_LOGIN_FORM},
                 {invalidUser, Messages.MSG_ERROR_ABOVE_LOGIN_FORM}
         };
     }

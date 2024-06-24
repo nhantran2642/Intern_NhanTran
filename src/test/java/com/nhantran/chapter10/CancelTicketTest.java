@@ -19,7 +19,7 @@ public class CancelTicketTest extends TestBase {
     private BookTicketPage bookTicketPage = new BookTicketPage();
     private BookTicketSuccessPage bookTicketSuccessPage = new BookTicketSuccessPage();
     private MyTicketPage myTicketPage = new MyTicketPage();
-    private User validUser = new User(Constants.VALID_USERNAME, Constants.VALID_PASSWORD);
+    private User validUser = User.getValidUser();
     private Tickets ticket = new Tickets(DateTimeHelper.calculateNextDate(6), RailwayStations.DA_NANG, RailwayStations.NHA_TRANG, SeatTypes.SOFT_SEAT, 1);
 
     @Test(description = "User can cancel a ticket")

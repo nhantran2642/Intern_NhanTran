@@ -3,6 +3,7 @@ package com.nhantran.utils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
@@ -20,6 +21,12 @@ public class DriverManager {
     public static void setFireFoxDriver(String url) {
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
+        navigateToTestSite(url);
+    }
+
+    public static void setEdgeDriver(String url) {
+        WebDriverManager.firefoxdriver().setup();
+        driver = new EdgeDriver();
         navigateToTestSite(url);
     }
 

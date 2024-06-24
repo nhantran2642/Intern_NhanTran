@@ -2,6 +2,7 @@ package com.nhantran.chapter10;
 
 import com.nhantran.base.TestBase;
 import com.nhantran.enums.RailwayTabs;
+import com.nhantran.models.User;
 import com.nhantran.pages.*;
 import com.nhantran.common.Constants;
 import com.nhantran.common.Messages;
@@ -20,13 +21,13 @@ public class ResetPasswordTest extends TestBase {
     @DataProvider(name = "resetPasswordData")
     public Object[][] dataTestTC010AndTC011() {
         return new Object[][]{
-                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD, Constants.VALID_PASSWORD, Messages.MSG_ERROR_NEW_PASSWORD_SAME_OLD_PASSWORD, null},
-                {Constants.VALID_USERNAME, Constants.VALID_PASSWORD + "a", Constants.VALID_PASSWORD + "abc", Messages.MSG_ERROR_ABOVE_RESET_PASSWORD_FORM, Messages.MSG_ERROR_CONFIRM_PASSWORD_NOT_MATCH_PASSWORD}
+                {User.getValidUser().getEmail(), User.getValidUser().getPassword(), User.getValidUser().getPassword(), Messages.MSG_ERROR_NEW_PASSWORD_SAME_OLD_PASSWORD, null},
+                {User.getValidUser().getEmail(), User.getValidUser().getPassword() + "1", User.getValidUser().getPassword() + "2", Messages.MSG_ERROR_ABOVE_RESET_PASSWORD_FORM, Messages.MSG_ERROR_CONFIRM_PASSWORD_NOT_MATCH_PASSWORD}
         };
     }
 
     @Test(dataProvider = "resetPasswordData", description = "Reset password shows error if the new password is same as current password or not matches the confirm password")
-    public void TC010_011_ErrorMessageDisplayWhenNewPasswordSameAsOldPasswordOrNotMatchConfirmPassword(String username, String password, String confirmPassword, String expectedMessageAboveForm, String expectedMessageNextToTextBox) {
+    public void TC010_011_ErrorMessageDisplayWhenNewPasswordSameAsOldPasswordOrNotMatchConfirmPassword(String username, String newPassword, String confirmPassword, String expectedMessageAboveForm, String expectedMessageNextToTextBox) {
         String railwayWindow = WindowControl.getWindowHandle();
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.clickForgotPasswordLink();
@@ -40,7 +41,7 @@ public class ResetPasswordTest extends TestBase {
         WindowControl.switchToRemainingTab(railwayWindow, mailWindow);
         Assert.assertTrue(resetPasswordPage.isChangePasswordFormDisplayed());
         Assert.assertEquals(resetPasswordPage.getResetTokenInTextBox(), resetToken);
-        resetPasswordPage.resetPassword(password, confirmPassword);
+        resetPasswordPage.resetPassword(newPassword, confirmPassword);
         Assert.assertEquals(resetPasswordPage.getMessageAboveForm(), expectedMessageAboveForm);
         Assert.assertEquals(resetPasswordPage.getMessageNextToConfirmPassword(), expectedMessageNextToTextBox);
     }

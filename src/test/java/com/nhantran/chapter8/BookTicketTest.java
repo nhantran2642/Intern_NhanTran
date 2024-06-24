@@ -2,6 +2,8 @@ package com.nhantran.chapter8;
 
 import com.nhantran.base.TestBase;
 import com.nhantran.pages.*;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class BookTicketTest extends TestBase {
 
@@ -18,8 +20,8 @@ public class BookTicketTest extends TestBase {
     BookTicketPage bookTicketPage = new BookTicketPage();
     BookTicketSuccessPage successPage = new BookTicketSuccessPage();
 
-//    @Test
-//    public void TC01_BookTicketAndCheckInfo() {
+    @Test
+    public void TC01_BookTicketAndCheckInfo() {
 //        homePage.clickTab("Login");
 //        loginPage.login(properties.getProperty("valid_username"), properties.getProperty("valid_password"));
 //        homePage.clickTab("Timetable");
@@ -43,6 +45,6 @@ public class BookTicketTest extends TestBase {
 //        Assert.assertEquals(ticketDepartDate, departDate, "Depart date not matching");
 //        Assert.assertEquals(ticketSeatType, seatType, "Seat type not matching");
 //        Assert.assertEquals(ticketBookedAmount, String.valueOf(ticketAmount), "Ticket amount not matching");
-//    }
+    }
 
 }
