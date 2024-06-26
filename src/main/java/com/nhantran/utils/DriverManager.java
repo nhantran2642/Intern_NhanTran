@@ -20,7 +20,6 @@ import java.time.Duration;
 public class DriverManager {
 
     public static WebDriver driver;
-    public static DesiredCapabilities capability;
 
     public static void initLocalDriver(String browser) {
         switch (browser) {
@@ -41,7 +40,7 @@ public class DriverManager {
 
     public static void initRemoteDriver(String browser) {
         try {
-            capability = new DesiredCapabilities();
+            DesiredCapabilities capability = new DesiredCapabilities();
             capability.setPlatform(Platform.ANY);
             switch (browser) {
                 case "chrome":
