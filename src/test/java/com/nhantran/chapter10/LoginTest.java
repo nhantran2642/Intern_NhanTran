@@ -1,15 +1,11 @@
 package com.nhantran.chapter10;
 
 import com.nhantran.base.TestBase;
+import com.nhantran.common.Messages;
 import com.nhantran.enums.RailwayTabs;
 import com.nhantran.models.User;
 import com.nhantran.pages.HomePage;
 import com.nhantran.pages.LoginPage;
-import com.nhantran.common.Constants;
-import com.nhantran.common.Messages;
-import com.nhantran.utils.JsonFileReader;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

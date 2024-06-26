@@ -63,7 +63,7 @@ public class User {
             JSONObject userObj = (JSONObject) ((JSONArray) accounts.get(accountName)).get(0);
             return new User((String) userObj.get("email"), (String) userObj.get("password"));
         } else {
-            return null;
+            throw new NullPointerException();
         }
     }
 
@@ -74,31 +74,31 @@ public class User {
             JSONObject userObj = (JSONObject) ((JSONArray) accounts.get(accountName)).get(0);
             return new User((String) userObj.get("email"), (String) userObj.get("password"), (String) userObj.get("confirmPassword"), (String) userObj.get("pid"));
         } else {
-            return null;
+            throw new NullPointerException();
         }
     }
 
-    public static User getValidUser(){
+    public static User getValidUser() {
         return getLoginAccountFromJsonFile("validAccount");
     }
 
-    public static User getInvalidUser(){
+    public static User getInvalidUser() {
         return getLoginAccountFromJsonFile("invalidAccount");
     }
 
-    public static User getBlankEmailUser(){
-        return getLoginAccountFromJsonFile("blankEmailAccount");
+    public static User getBlankEmailUser() {
+        return getLoginAccountFromJsonFile("accountWithBlankEmail");
     }
 
-    public static User getInactivatedUser(){
+    public static User getInactivatedUser() {
         return getLoginAccountFromJsonFile("inactivatedAccount");
     }
 
-    public static User getAlreadyRegisteredUser(){
+    public static User getAlreadyRegisteredUser() {
         return getRegisterAccountFromJsonFile("alreadyRegisteredAccount");
     }
 
-    public static User getEmptyPasswordPidUser(){
-        return getRegisterAccountFromJsonFile("emptyPasswordPidAccount");
+    public static User getEmptyPasswordPidUser() {
+        return getRegisterAccountFromJsonFile("accountWithEmptyPasswordPid");
     }
 }
