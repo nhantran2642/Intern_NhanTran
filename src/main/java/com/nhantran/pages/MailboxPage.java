@@ -17,11 +17,12 @@ public class MailboxPage {
     private ComboBox cbbMailDomain = new ComboBox(By.xpath("//select[@id='gm-host-select']"));
 
 
-    public void uncheckScrambleAddressCheckbox() {
+    private void uncheckScrambleAddressCheckbox() {
         chkScrambleAddress.uncheck();
     }
 
     public String getMail() {
+        uncheckScrambleAddressCheckbox();
         return tmpMail.getText();
     }
 
