@@ -2,9 +2,9 @@
 
 ### OVERVIEW
 
-*This is my personal project in my automation testing internship course 2024 at [AGEST DANANG](https://www.agest.vn/).*
+*This is my project in my automation testing internship course 2024 at [AGEST VIETNAM](https://www.agest.vn/).*
 
-The purpose of this project is to learn about how to build an automation framework by using Selenium.
+The purpose of this project is to learn about how to build an automation testing framework by using Selenium.
 
 My project applies the POM framework in Selenium and uses Java as the scripting language. Maven is used for dependency management and continuous development. TestNG is used to maintain test cases. Extent Report is used to report the result of the test suite. A simple Selenium Grid is implemented to run tests in parallel on different browser.
 
@@ -27,6 +27,7 @@ My project applies the POM framework in Selenium and uses Java as the scripting 
 * TestNG 
 * Extent Reports
 * POM (Page Object Models)
+* Data Driven
 
 ### INSTALLATION
 
@@ -53,29 +54,30 @@ git clone https://github.com/tranthanhnhan2604/Intern_NhanTran.git
     * listeners: TestNG listeners are used for reporting.
 * **src/test/src**: Contains .xml file for TestNG and Log4j configuration.
 
-### RUNNING TESTS
+### TEST RUNNING
 There are 2 ways to run this project:
 
 1. Run on local
 
-   * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"local"*.
+    * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"local"*.
 
-   * Select the test cases you want to run in this file.
+    * Select the test cases you want to run in this file.
 
-   * Right click anywhere on file ```testng.xml``` and select ```Run '\src\test\java\src\testng.xml'``` to run test scripts.
+    * Right click anywhere on file ```testng.xml``` and select ```Run '\src\test\java\src\testng.xml'``` to run test scripts.
 
 2. Run on grid
 
-   * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"grid"*.
+    * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"grid"*.
 
-   * Go to the folder ```src\main\resources\grids```, and make sure the file ```selenium-server-4.21.0.jar``` exists in this folder, if not you can download it at [here](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.21.0/selenium-server-4.21.0.jar) and save it in this folder.
+    * Go to the folder ```src\main\resources\grids```, and make sure the file ```selenium-server-4.21.0.jar``` exists in this folder, if not you can download it at [here](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.21.0/selenium-server-4.21.0.jar) and save it in this folder.
 
-   * Run respectively file ```selenium-grid-hub.bat``` and file ```selenium-grid-node.bat```.
+    * Run respectively file ```selenium-grid-hub.bat``` and file ```selenium-grid-node.bat```.
 
 > Note: In case, you want to run test scripts in parallel, you can config file ```testng.xml``` as
-> 
+>
 > ```<suite name="RegressionSuite" verbose="1" parallel="classes" thread-count="1">```
 
-## Author
+## AUTHOR
 
 - [@tranthanhnhan2604](https://www.github.com/tranthanhnhan2604)
+
