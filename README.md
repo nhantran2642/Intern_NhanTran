@@ -2,7 +2,7 @@
 
 ### OVERVIEW
 
-*This is my project in my automation testing internship course 2024 at [AGEST VIETNAM](https://www.agest.vn/).*
+*This is my personal project in my automation testing internship course 2024 at [AGEST VIETNAM](https://www.agest.vn/).*
 
 The purpose of this project is to learn about how to build an automation testing framework by using Selenium.
 
@@ -16,7 +16,7 @@ My project applies the POM framework in Selenium and uses Java as the scripting 
 * [INSTALLATION](#INSTALLATION) 
 * [FOLDER USAGE](#FOLDER-USAGE) 
 * [TEST RUNNING](#TEST-RUNNING)
-* [AUTHOR](#AUTHOR) 
+* [AUTHOR & SUPPORTERS](#AUTHOR) 
 
 ### TECHNOLOGIES AND FRAMEWORK
 * Java 11
@@ -81,3 +81,7 @@ There are 2 ways to run this project:
 
 - [@tranthanhnhan2604](https://www.github.com/tranthanhnhan2604)
 
+## SUPPORTERS
+
+- [@vihoang0706](https://github.com/vihoang0706)
+- [@HoaiLinh0908](https://github.com/HoaiLinh0908)
