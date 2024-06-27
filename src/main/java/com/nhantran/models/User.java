@@ -57,25 +57,13 @@ public class User {
     }
 
     private static User getLoginAccountFromJsonFile(String accountName) {
-        JSONObject jsonObject = JsonFileReader.readJsonFromFile(Constants.ACCOUNT_JSON_FILE_PATH);
-        if (jsonObject != null) {
-            JSONObject accounts = (JSONObject) jsonObject.get("loginAccounts");
-            JSONObject userObj = (JSONObject) ((JSONArray) accounts.get(accountName)).get(0);
-            return new User((String) userObj.get("email"), (String) userObj.get("password"));
-        } else {
-            throw new NullPointerException();
-        }
+        JSONObject userObj = JsonFileReader.readUserAccountFromFile("loginAccounts", accountName);
+        return new User((String) userObj.get("email"), (String) userObj.get("password"));
     }
 
     private static User getRegisterAccountFromJsonFile(String accountName) {
-        JSONObject jsonObject = JsonFileReader.readJsonFromFile(Constants.ACCOUNT_JSON_FILE_PATH);
-        if (jsonObject != null) {
-            JSONObject accounts = (JSONObject) jsonObject.get("registerAccounts");
-            JSONObject userObj = (JSONObject) ((JSONArray) accounts.get(accountName)).get(0);
-            return new User((String) userObj.get("email"), (String) userObj.get("password"), (String) userObj.get("confirmPassword"), (String) userObj.get("pid"));
-        } else {
-            throw new NullPointerException();
-        }
+        JSONObject userObj = JsonFileReader.readUserAccountFromFile("registerAccounts", accountName);
+        return new User((String) userObj.get("email"), (String) userObj.get("password"), (String) userObj.get("confirmPassword"), (String) userObj.get("pid"));
     }
 
     public static User getValidUser() {
