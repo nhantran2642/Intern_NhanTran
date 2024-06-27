@@ -11,19 +11,21 @@ import org.testng.annotations.Parameters;
 @Listeners(TestListener.class)
 public class TestBase {
 
-    private void startAUT(String browser, String environment) {
-        if (environment.equals("grid")) {
+    private void startAUT(String browser, String runMode) {
+        if (runMode.equals("grid")) {
             DriverManager.initRemoteDriver(browser);
         } else {
             DriverManager.initLocalDriver(browser);
         }
+        DriverManager.maximizeWindow();
+        DriverManager.waitForPageToLoad();
         DriverManager.navigateToTestSite(Constants.RAILWAY_URL);
     }
 
-    @Parameters({"browser", "environment"})
+    @Parameters({"browser", "runMode"})
     @BeforeMethod
-    public void setUp(String browser, String environment) {
-        startAUT(browser, environment);
+    public void setUp(String browser, String runMode) {
+        startAUT(browser, runMode);
     }
 
     @AfterMethod

@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="RegressionSuite" verbose="1" parallel="classes" thread-count="1">
-    <parameter name="environment" value="grid"/>
+    <parameter name="runMode" value="grid"/>
     <listeners>
         <listener class-name="com.nhantran.listeners.TestListener"></listener>
     </listeners>
