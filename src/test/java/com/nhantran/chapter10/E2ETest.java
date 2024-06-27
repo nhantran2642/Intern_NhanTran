@@ -7,7 +7,7 @@ import com.nhantran.enums.BookTicketComboBoxes;
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.RailwayTabs;
 import com.nhantran.enums.SeatTypes;
-import com.nhantran.models.Tickets;
+import com.nhantran.models.Ticket;
 import com.nhantran.models.User;
 import com.nhantran.pages.*;
 import com.nhantran.utils.controls.WindowControl;
@@ -29,14 +29,13 @@ public class E2ETest extends TestBase {
     private MyTicketPage myTicketPage = new MyTicketPage();
 
     private User newUser = new User(null, "1234567890", "1234567890", "11111111111");
-    private Tickets ticket = new Tickets(DateTimeHelper.calculateNextDate(10), RailwayStations.DA_NANG, RailwayStations.HUE, SeatTypes.HARD_SEAT, 1);
+    private Ticket ticket = new Ticket(DateTimeHelper.calculateNextDate(10), RailwayStations.DA_NANG, RailwayStations.HUE, SeatTypes.HARD_SEAT, 1);
 
     @BeforeMethod(dependsOnMethods = "setUp")
     public void createSuccessfullyANewAccountAndLoginCreatedAccount() {
-        homePage.clickCreateAccountHyperlink();
+        homePage.goToRegisterPage();
         String railwayWindow = WindowControl.getWindowHandle();
         WindowControl.openSiteInNewTab(Constants.TEMPORARY_MAIL_URL);
-        mailboxPage.uncheckScrambleAddressCheckbox();
         newUser.setEmail(mailboxPage.getMail());
         String mailWindow = WindowControl.getWindowHandle();
         WindowControl.switchToWindow(railwayWindow);
