@@ -36,7 +36,6 @@ public class DriverManager {
                 driver = new EdgeDriver();
                 break;
         }
-        maximizeWindow();
     }
 
     public static void initRemoteDriver(String browser) {
@@ -61,19 +60,21 @@ public class DriverManager {
                     break;
             }
             driver = new RemoteWebDriver(new URL(Constants.NODE_URL), capability);
-            maximizeWindow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
     public static void navigateToTestSite(String url) {
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.navigate().to(url);
     }
 
-    private static void maximizeWindow() {
+    public static void waitForPageToLoad() {
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.PAGE_LOAD_WAIT_TIME));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICITLY_WAIT_TIME));
+    }
+
+    public static void maximizeWindow() {
         driver.manage().window().maximize();
     }
 
