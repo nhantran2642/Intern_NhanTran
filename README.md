@@ -30,7 +30,10 @@ My project applies the POM framework in Selenium and uses Java as the scripting 
 ### INSTALLATION
 
 * Clone the repository: 
-```https://github.com/tranthanhnhan2604/Intern_NhanTran.git```
+
+``` bash
+git clone https://github.com/tranthanhnhan2604/Intern_NhanTran.git
+```
 
 * Open project on IntelliJ IDEA or another IDEA.
 
