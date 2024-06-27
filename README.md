@@ -69,7 +69,7 @@ There are 2 ways to run this project:
 
     * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **runMode** to *"grid"*.
 
-    * Go to the folder ```src\main\resources\grids```, and make sure the file ```selenium-server-4.21.0.jar``` exists in this folder, if not you can download it at [here](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.21.0/selenium-server-4.21.0.jar) and save it in this folder.
+    * Go to the folder ```src\main\resources\grids```, and make sure the file ```selenium-server-4.21.0.jar``` exists in this folder, if not, you can download it at [here](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.21.0/selenium-server-4.21.0.jar) and save it in this folder.
 
     * Run respectively two .bat file ```selenium-grid-hub.bat``` and ```selenium-grid-node.bat```.
 
