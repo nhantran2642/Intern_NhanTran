@@ -37,7 +37,7 @@ My project applies the POM framework in Selenium and uses Java as the scripting 
 git clone https://github.com/tranthanhnhan2604/Intern_NhanTran.git
 ```
 
-* Open project on IntelliJ IDEA or another IDEA.
+* Open project on IntelliJ or another IDE.
 
 ### FOLDER USAGE
 
