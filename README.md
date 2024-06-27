@@ -59,7 +59,7 @@ There are 2 ways to run this project:
 
 1. Run on local
 
-    * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"local"*.
+    * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **runMode** to *"local"*.
 
     * Select the test cases you want to run in this file.
 
@@ -67,11 +67,11 @@ There are 2 ways to run this project:
 
 2. Run on grid
 
-    * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"grid"*.
+    * Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **runMode** to *"grid"*.
 
     * Go to the folder ```src\main\resources\grids```, and make sure the file ```selenium-server-4.21.0.jar``` exists in this folder, if not you can download it at [here](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.21.0/selenium-server-4.21.0.jar) and save it in this folder.
 
-    * Run respectively file ```selenium-grid-hub.bat``` and file ```selenium-grid-node.bat```.
+    * Run respectively two .bat file ```selenium-grid-hub.bat``` and ```selenium-grid-node.bat```.
 
 > Note: In case, you want to run test scripts in parallel, you can config file ```testng.xml``` as
 >
