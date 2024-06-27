@@ -53,4 +53,22 @@ git clone https://github.com/tranthanhnhan2604/Intern_NhanTran.git
 * **src/test/src**: Contains .xml file for TestNG and Log4j configuration.
 
 ### TEST RUNNING
-...
+There are 2 ways to run this project:
+
+1. Run on local
+
+* Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"local"*.
+
+* Select test cases you want to run in this file.
+
+* Right click anywhere on file ```testng.xml``` and select ```Run '\src\test\java\src\testng.xml'``` to run test scripts.
+
+2. Run on grid
+
+* Go to the configuration file of TestNG in path ```src\test\java\src\testng.xml``` and change the value of the parameter **environment** to *"grid"*.
+
+* Go to the folder ```src\main\resources\grids```, make sure the file ```selenium-server-4.21.0.jar``` exists in this folder, if not you can download it at [here](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.21.0/selenium-server-4.21.0.jar) and save it in this folder.
+
+* Run respectively file ```selenium-grid-hub.bat``` and file ```selenium-grid-node.bat```.
+
+> Note: In case, you want to run test scripts by parallel, you can config file ```testng.xml``` as ```<suite name="RegressionSuite" verbose="1" parallel="classes" thread-count="1">```
