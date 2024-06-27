@@ -1,6 +1,6 @@
 package com.nhantran.pages;
 
-import com.nhantran.models.Tickets;
+import com.nhantran.models.Ticket;
 import com.nhantran.utils.controls.Alert;
 import com.nhantran.utils.controls.Button;
 import com.nhantran.utils.controls.Label;
@@ -23,7 +23,7 @@ public class MyTicketPage extends BasePage {
             "td[count(//tr/th[text()='Depart Date']/preceding-sibling::th)+1][text()='%s'] and " +
             "td[count(//tr/th[text()='Amount']/preceding-sibling::th)+1][text()='%d']]";
 
-    public void cancelTicket(Tickets ticket) {
+    public void cancelTicket(Ticket ticket) {
         Button btnCancelTicket = new Button(By.xpath(String.format(dynButtonCancelTicket, ticket.getDepartStation().getValue(), ticket.getArrivalStation().getValue(), ticket.getSeatType().getValue(), ticket.getDepartDate(), ticket.getTicketAmount())));
         btnCancelTicket.click();
     }
@@ -33,7 +33,7 @@ public class MyTicketPage extends BasePage {
         alert.acceptAlert();
     }
 
-    public boolean isCancelledTicketDisplayed(Tickets ticket) {
+    public boolean isCancelledTicketDisplayed(Ticket ticket) {
         Label tkRow = new Label(By.xpath(String.format(dynTicketRow, ticket.getDepartStation().getValue(), ticket.getArrivalStation().getValue(), ticket.getSeatType().getValue(), ticket.getDepartDate(), ticket.getTicketAmount())));
         return tkRow.isDisplayed();
 

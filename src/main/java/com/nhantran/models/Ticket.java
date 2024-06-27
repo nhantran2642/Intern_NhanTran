@@ -3,7 +3,7 @@ package com.nhantran.models;
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.SeatTypes;
 
-public class Tickets {
+public class Ticket {
 
     private String departDate;
     private RailwayStations departStation;
@@ -11,18 +11,13 @@ public class Tickets {
     private SeatTypes seatType;
     private Integer ticketAmount;
 
-    public Tickets(String departDate, SeatTypes seatType, Integer ticketAmount) {
+    public Ticket(String departDate, SeatTypes seatType, Integer ticketAmount) {
         this.departDate = departDate;
         this.seatType = seatType;
         this.ticketAmount = ticketAmount;
     }
 
-    public Tickets(String departDate, Integer ticketAmount) {
-        this.departDate = departDate;
-        this.ticketAmount = ticketAmount;
-    }
-
-    public Tickets(String departDate, RailwayStations departStation, RailwayStations arrivalStation, SeatTypes seatType, Integer ticketAmount) {
+    public Ticket(String departDate, RailwayStations departStation, RailwayStations arrivalStation, SeatTypes seatType, Integer ticketAmount) {
         this.departDate = departDate;
         this.departStation = departStation;
         this.arrivalStation = arrivalStation;
