@@ -5,10 +5,9 @@ import com.nhantran.enums.BookTicketComboBoxes;
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.RailwayTabs;
 import com.nhantran.enums.SeatTypes;
-import com.nhantran.models.Tickets;
+import com.nhantran.models.Ticket;
 import com.nhantran.models.User;
 import com.nhantran.pages.*;
-import com.nhantran.common.Constants;
 import com.nhantran.utils.helpers.DateTimeHelper;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -22,18 +21,18 @@ public class BookTicketTest extends TestBase {
     private TicketPricePage ticketPricePage = new TicketPricePage();
     private BookTicketPage bookTicketPage = new BookTicketPage();
     private BookTicketSuccessPage bookTicketSuccessPage = new BookTicketSuccessPage();
-    private User validUser = User.getValidUser();
+    private User validUser = User.getLoginAccountFromJsonFile("validAccount");
 
     @DataProvider(name = "bookTicketData")
     public Object[][] dataTestTC012AndTC013() {
         return new Object[][]{
-                {new Tickets(DateTimeHelper.calculateNextDate(12), RailwayStations.NHA_TRANG, RailwayStations.HUE, SeatTypes.SOFT_BED_AIR_CONDITIONER, 1)},
-                {new Tickets(DateTimeHelper.calculateNextDate(25), RailwayStations.NHA_TRANG, RailwayStations.DA_NANG, SeatTypes.SOFT_SEAT_AIR_CONDITIONER, 3)}
+                {new Ticket(DateTimeHelper.calculateNextDate(12), RailwayStations.NHA_TRANG, RailwayStations.HUE, SeatTypes.SOFT_BED_AIR_CONDITIONER, 1)},
+                {new Ticket(DateTimeHelper.calculateNextDate(25), RailwayStations.NHA_TRANG, RailwayStations.DA_NANG, SeatTypes.SOFT_SEAT_AIR_CONDITIONER, 3)}
         };
     }
 
     @Test(dataProvider = "bookTicketData", description = "User can book 1 ticket or many tickets at a time")
-    public void TC012_013_BookSuccessfullyATicketAndManyTickets(Tickets ticket) {
+    public void TC012_013_BookSuccessfullyATicketAndManyTickets(Ticket ticket) {
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(validUser);
         homePage.clickTab(RailwayTabs.BOOK_TICKET);
@@ -64,7 +63,7 @@ public class BookTicketTest extends TestBase {
 
     @Test(description = "User can book ticket from Timetable")
     public void TC015_BookSuccessfullyTicketFromTimetable() {
-        Tickets ticket = new Tickets(DateTimeHelper.calculateNextDate(10), SeatTypes.HARD_SEAT, 3);
+        Ticket ticket = new Ticket(DateTimeHelper.calculateNextDate(10), SeatTypes.HARD_SEAT, 3);
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(validUser);
         homePage.clickTab(RailwayTabs.TIMETABLE);

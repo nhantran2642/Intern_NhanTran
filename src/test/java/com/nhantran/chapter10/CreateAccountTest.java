@@ -20,8 +20,8 @@ public class CreateAccountTest extends TestBase {
     private MailboxPage mailboxPage = new MailboxPage();
     private RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage();
 
-    private User alreadyRegistedUser = User.getAlreadyRegisteredUser();
-    private User emptyPasswordPidUser = User.getEmptyPasswordPidUser();
+    private User alreadyRegistedUser = User.getRegisterAccountFromJsonFile("alreadyRegisteredAccount");
+    private User emptyPasswordPidUser = User.getRegisterAccountFromJsonFile("accountWithEmptyPasswordPid");
     private User newUser = new User(null, "1234567890", "1234567890", "11111111111");
 
     @Test(description = "User can't create account with an already in-use email")
@@ -42,10 +42,9 @@ public class CreateAccountTest extends TestBase {
 
     @Test(description = "User create and activate account")
     public void TC009_CreateAndActiveSuccessfullyAnAccount() {
-        homePage.clickCreateAccountHyperlink();
+        homePage.goToRegisterPage();
         String railwayWindow = WindowControl.getWindowHandle();
         WindowControl.openSiteInNewTab(Constants.TEMPORARY_MAIL_URL);
-        mailboxPage.uncheckScrambleAddressCheckbox();
         newUser.setEmail(mailboxPage.getMail());
         String mailWindow = WindowControl.getWindowHandle();
         WindowControl.switchToWindow(railwayWindow);

@@ -56,37 +56,13 @@ public class User {
         this.pid = pid;
     }
 
-    private static User getLoginAccountFromJsonFile(String accountName) {
+    public static User getLoginAccountFromJsonFile(String accountName) {
         JSONObject userObj = JsonFileReader.readUserAccountFromFile("loginAccounts", accountName);
         return new User((String) userObj.get("email"), (String) userObj.get("password"));
     }
 
-    private static User getRegisterAccountFromJsonFile(String accountName) {
+    public static User getRegisterAccountFromJsonFile(String accountName) {
         JSONObject userObj = JsonFileReader.readUserAccountFromFile("registerAccounts", accountName);
         return new User((String) userObj.get("email"), (String) userObj.get("password"), (String) userObj.get("confirmPassword"), (String) userObj.get("pid"));
-    }
-
-    public static User getValidUser() {
-        return getLoginAccountFromJsonFile("validAccount");
-    }
-
-    public static User getInvalidUser() {
-        return getLoginAccountFromJsonFile("invalidAccount");
-    }
-
-    public static User getBlankEmailUser() {
-        return getLoginAccountFromJsonFile("accountWithBlankEmail");
-    }
-
-    public static User getInactivatedUser() {
-        return getLoginAccountFromJsonFile("inactivatedAccount");
-    }
-
-    public static User getAlreadyRegisteredUser() {
-        return getRegisterAccountFromJsonFile("alreadyRegisteredAccount");
-    }
-
-    public static User getEmptyPasswordPidUser() {
-        return getRegisterAccountFromJsonFile("accountWithEmptyPasswordPid");
     }
 }

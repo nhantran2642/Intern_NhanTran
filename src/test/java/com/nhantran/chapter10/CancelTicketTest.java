@@ -4,10 +4,9 @@ import com.nhantran.base.TestBase;
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.RailwayTabs;
 import com.nhantran.enums.SeatTypes;
-import com.nhantran.models.Tickets;
+import com.nhantran.models.Ticket;
 import com.nhantran.models.User;
 import com.nhantran.pages.*;
-import com.nhantran.common.Constants;
 import com.nhantran.utils.helpers.DateTimeHelper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,8 +18,8 @@ public class CancelTicketTest extends TestBase {
     private BookTicketPage bookTicketPage = new BookTicketPage();
     private BookTicketSuccessPage bookTicketSuccessPage = new BookTicketSuccessPage();
     private MyTicketPage myTicketPage = new MyTicketPage();
-    private User validUser = User.getValidUser();
-    private Tickets ticket = new Tickets(DateTimeHelper.calculateNextDate(6), RailwayStations.DA_NANG, RailwayStations.NHA_TRANG, SeatTypes.SOFT_SEAT, 1);
+    private User validUser = User.getLoginAccountFromJsonFile("validAccount");
+    private Ticket ticket = new Ticket(DateTimeHelper.calculateNextDate(6), RailwayStations.DA_NANG, RailwayStations.NHA_TRANG, SeatTypes.SOFT_SEAT, 1);
 
     @Test(description = "User can cancel a ticket")
     public void TC016_CancelATicketSuccessfully() {
