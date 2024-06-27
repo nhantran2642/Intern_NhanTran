@@ -30,7 +30,7 @@ public class BaseControl {
     }
 
     public void waitUntilElementVisible() {
-        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(Constants.WAIT_TIME));
+        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(Constants.DRIVER_WAIT_TIME));
         wait.until(ExpectedConditions.visibilityOfElementLocated(this.locator));
     }
 
