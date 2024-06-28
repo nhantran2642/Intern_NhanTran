@@ -74,14 +74,15 @@ There are 2 ways to run this project:
     * Run respectively two .bat file ```selenium-grid-hub.bat``` and ```selenium-grid-node.bat```.
 
 > Note:
+> 
+> * In case you want to run test scripts in different browsers, you can config file ```testng.xml``` as
+>
+> ```<parameter name="browser" value="chrome"/>``` with the value is ```chrome```, ```firefox``` or ```edge```
 >
 > * In case you want to run test scripts in parallel, you can config file ```testng.xml``` as
 >
 > ```<suite name="RegressionSuite" verbose="1" parallel="classes" thread-count="1">```
->
-> * In case you want to run test scripts in different browsers, you can config file ```testng.xml``` as
->
-> ```<parameter name="browser" value="chrome"/>``` with the value is ```chrome```, ```firefox``` or ```edge```
+
 
 ## AUTHOR
 
