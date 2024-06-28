@@ -1,4 +1,4 @@
-package com.nhantran.chapter10;
+package com.nhantran.finaltest;
 
 import com.nhantran.base.TestBase;
 import com.nhantran.enums.RailwayStations;
@@ -7,29 +7,28 @@ import com.nhantran.enums.SeatTypes;
 import com.nhantran.models.Ticket;
 import com.nhantran.models.User;
 import com.nhantran.pages.*;
-import com.nhantran.utils.helpers.DateTimeHelper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CancelTicketTest extends TestBase {
+public class FTTC703_BookTicketWithKnownPrice extends TestBase {
 
     private HomePage homePage = new HomePage();
     private LoginPage loginPage = new LoginPage();
+    private TicketPricePage ticketPricePage = new TicketPricePage();
     private BookTicketPage bookTicketPage = new BookTicketPage();
     private BookTicketSuccessPage bookTicketSuccessPage = new BookTicketSuccessPage();
-    private MyTicketPage myTicketPage = new MyTicketPage();
     private User validUser = User.getLoginAccountFromJsonFile("validAccount");
-    private Ticket ticket = new Ticket(DateTimeHelper.calculateNextDate(6), RailwayStations.DA_NANG, RailwayStations.NHA_TRANG, SeatTypes.SOFT_SEAT, 1);
 
-    @Test(description = "User can cancel a ticket")
-    public void TC016_CancelATicketSuccessfully() {
+    @Test(description = "User can book ticket from Ticket price with known price")
+    public void FTTC703() {
+        Ticket ticket = new Ticket(null, 2);
         homePage.clickTab(RailwayTabs.LOGIN);
         loginPage.login(validUser);
-        homePage.clickTab(RailwayTabs.BOOK_TICKET);
+        homePage.clickTab(RailwayTabs.TICKET_PRICE);
+        ticketPricePage.clickCheckPriceButton(RailwayStations.HUE, RailwayStations.QUANG_NGAI);
+        Integer priceOfSeat = ticketPricePage.getPriceOfSeatType("HS");
+        ticketPricePage.clickBookTicketButton(SeatTypes.HARD_SEAT);
         bookTicketPage.bookTicket(ticket);
-        bookTicketSuccessPage.clickTab(RailwayTabs.MY_TICKET);
-        myTicketPage.cancelTicket(ticket);
-        myTicketPage.acceptToCancelTicket();
-        Assert.assertFalse(myTicketPage.isCanceledTicketDisplayed(ticket), "Ticket still display");
+        Assert.assertEquals(bookTicketSuccessPage.getTicketTotalPrice(), priceOfSeat * ticket.getTicketAmount(), "Total price incorrectly");
     }
 }

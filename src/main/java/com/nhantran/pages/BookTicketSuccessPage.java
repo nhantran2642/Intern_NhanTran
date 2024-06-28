@@ -12,6 +12,7 @@ public class BookTicketSuccessPage extends BasePage {
     private By lblTicketSeatType = By.xpath(String.format(dynCellBookedTicketTable, "Seat Type"));
     private By lblTicketDepartDate = By.xpath(String.format(dynCellBookedTicketTable, "Depart Date"));
     private By lblTicketAmount = By.xpath(String.format(dynCellBookedTicketTable, "Amount"));
+    private By lblTicketTotalPrice = By.xpath(String.format(dynCellBookedTicketTable, "Total Price"));
 
     public boolean isSuccessfulMessageDisplayed(String message) {
         Label successfulMessage = new Label(By.xpath(String.format(dynHeaderBookingSuccessfully, message)));
@@ -40,6 +41,11 @@ public class BookTicketSuccessPage extends BasePage {
 
     public Integer getTicketAmount() {
         Label tkAmount = new Label(lblTicketAmount);
+        return Integer.parseInt(tkAmount.getText());
+    }
+
+    public Integer getTicketTotalPrice() {
+        Label tkAmount = new Label(lblTicketTotalPrice);
         return Integer.parseInt(tkAmount.getText());
     }
 }

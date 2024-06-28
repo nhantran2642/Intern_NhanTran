@@ -2,6 +2,10 @@ package com.nhantran.models;
 
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.SeatTypes;
+import com.nhantran.utils.helpers.DateTimeHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ticket {
 
@@ -14,6 +18,11 @@ public class Ticket {
     public Ticket(String departDate, SeatTypes seatType, Integer ticketAmount) {
         this.departDate = departDate;
         this.seatType = seatType;
+        this.ticketAmount = ticketAmount;
+    }
+
+    public Ticket(String departDate, Integer ticketAmount) {
+        this.departDate = departDate;
         this.ticketAmount = ticketAmount;
     }
 
@@ -63,5 +72,14 @@ public class Ticket {
 
     public void setTicketAmount(Integer ticketAmount) {
         this.ticketAmount = ticketAmount;
+    }
+
+    public static List<Ticket> generateTicketsWithDifferentDepartDate(Integer numberOfTickets, RailwayStations departStation, RailwayStations arriveStation, SeatTypes seatType, Integer amount) {
+        List<Ticket> listOfTickets = new ArrayList<>();
+        for (int i = 1; i <= numberOfTickets; i++) {
+            String departDate = DateTimeHelper.calculateNextDate(10 + i);
+            listOfTickets.add(new Ticket(departDate, departStation, arriveStation, seatType, amount));
+        }
+        return listOfTickets;
     }
 }
