@@ -1,15 +1,11 @@
 package com.nhantran.chapter10;
 
 import com.nhantran.base.TestBase;
+import com.nhantran.common.Messages;
 import com.nhantran.enums.RailwayTabs;
 import com.nhantran.models.User;
 import com.nhantran.pages.HomePage;
 import com.nhantran.pages.LoginPage;
-import com.nhantran.common.Constants;
-import com.nhantran.common.Messages;
-import com.nhantran.utils.JsonFileReader;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -19,10 +15,10 @@ public class LoginTest extends TestBase {
     private HomePage homePage = new HomePage();
     private LoginPage loginPage = new LoginPage();
 
-    private User validUser = User.getValidUser();
-    private User invalidUser = User.getInvalidUser();
-    private User blankEmailUser = User.getBlankEmailUser();
-    private User inactiveUser = User.getInactivatedUser();
+    private User validUser = User.getLoginAccountFromJsonFile("validAccount");
+    private User invalidUser = User.getLoginAccountFromJsonFile("invalidAccount");
+    private User blankEmailUser = User.getLoginAccountFromJsonFile("accountWithBlankEmail");
+    private User inactiveUser = User.getLoginAccountFromJsonFile("inactivatedAccount");
 
     @Test(description = "User can log into Railway with valid username and password")
     public void TC001_LoginSuccessfullyWithValidAccount() {

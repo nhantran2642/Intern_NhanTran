@@ -18,11 +18,13 @@ public class ResetPasswordTest extends TestBase {
     private ForgetPasswordPage forgetPasswordPage = new ForgetPasswordPage();
     private ResetPasswordPage resetPasswordPage = new ResetPasswordPage();
 
+    private User validUser = User.getLoginAccountFromJsonFile("validAccount");
+
     @DataProvider(name = "resetPasswordData")
     public Object[][] dataTestTC010AndTC011() {
         return new Object[][]{
-                {User.getValidUser().getEmail(), User.getValidUser().getPassword(), User.getValidUser().getPassword(), Messages.MSG_ERROR_NEW_PASSWORD_SAME_OLD_PASSWORD, null},
-                {User.getValidUser().getEmail(), User.getValidUser().getPassword() + "1", User.getValidUser().getPassword() + "2", Messages.MSG_ERROR_ABOVE_RESET_PASSWORD_FORM, Messages.MSG_ERROR_CONFIRM_PASSWORD_NOT_MATCH_PASSWORD}
+                {validUser.getEmail(), validUser.getPassword(), validUser.getPassword(), Messages.MSG_ERROR_NEW_PASSWORD_SAME_OLD_PASSWORD, null},
+                {validUser.getEmail(), validUser.getPassword() + "1", validUser.getPassword() + "2", Messages.MSG_ERROR_ABOVE_RESET_PASSWORD_FORM, Messages.MSG_ERROR_CONFIRM_PASSWORD_NOT_MATCH_PASSWORD}
         };
     }
 

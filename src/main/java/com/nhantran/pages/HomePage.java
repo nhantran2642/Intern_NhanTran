@@ -17,7 +17,7 @@ public class HomePage extends BasePage {
         return title.isDisplayed();
     }
 
-    public void clickCreateAccountHyperlink() {
+    public void goToRegisterPage() {
         createAccountHyperlink.click();
     }
 

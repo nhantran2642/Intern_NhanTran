@@ -3,7 +3,7 @@ package com.nhantran.pages;
 import com.nhantran.enums.BookTicketComboBoxes;
 import com.nhantran.enums.RailwayStations;
 import com.nhantran.enums.SeatTypes;
-import com.nhantran.models.Tickets;
+import com.nhantran.models.Ticket;
 import com.nhantran.utils.controls.Button;
 import com.nhantran.utils.controls.ComboBox;
 import org.openqa.selenium.By;
@@ -51,7 +51,7 @@ public class BookTicketPage extends BasePage {
         btnBookTicket.click();
     }
 
-    public void bookTicket(Tickets ticket) {
+    public void bookTicket(Ticket ticket) {
         selectDepartDate(ticket.getDepartDate());
         selectDepartStation(ticket.getDepartStation());
         selectSeatType(ticket.getSeatType());
