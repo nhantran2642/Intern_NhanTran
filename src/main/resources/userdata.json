@@ -1,0 +1,46 @@
+{
+  "loginAccounts": {
+    "validAccount": [
+      {
+        "email": "nhantran@sharklasers.com",
+        "password": "123456789"
+      }
+    ],
+    "invalidAccount": [
+      {
+        "email": "nhantran@sharklasers.com",
+        "password": "0123456789"
+      }
+    ],
+    "accountWithBlankEmail": [
+      {
+        "email": "",
+        "password": "123456789"
+      }
+    ],
+    "inactivatedAccount": [
+      {
+        "email": "nhantrannotactive@grr.la",
+        "password": "1234567890"
+      }
+    ]
+  },
+  "registerAccounts": {
+    "alreadyRegisteredAccount": [
+      {
+        "email": "nhantran@sharklasers.com",
+        "password": "123456789",
+        "confirmPassword": "123456789",
+        "pid": "000000000000"
+      }
+    ],
+    "accountWithEmptyPasswordPid": [
+      {
+        "email": "nhantran@sharklasers.com",
+        "password": "",
+        "confirmPassword": "",
+        "pid": ""
+      }
+    ]
+  }
+}

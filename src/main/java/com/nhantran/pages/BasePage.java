@@ -1,24 +1,24 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.enums.RailwayTabs;
+import com.nhantran.utils.controls.Link;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 public class BasePage {
 
-    private String railwayTab = "//div[@id='menu']//li/a/span[text()='%s']";
+    private String dynMenuTabSelector = "//div[@id='menu']//li/a/span[text()='%s']";
 
-    public void clickTab(String tabName) {
-        By tab = By.xpath(String.format(railwayTab, tabName));
-        SeleniumActions.clickElement(tab);
+    public void clickTab(RailwayTabs tabName) {
+        Link tab = new Link(By.xpath(String.format(dynMenuTabSelector, tabName.getValue())));
+        tab.click();
     }
 
-    public boolean checkTabDisplay(String tabName) {
-        By tab = By.xpath(String.format(railwayTab, tabName));
+    public boolean isTabDisplayed(RailwayTabs tabName) {
+        Link tab = new Link(By.xpath(String.format(dynMenuTabSelector, tabName.getValue())));
         try {
-            SeleniumActions.findElement(tab);
-            return true;
-        } catch (NoSuchElementException e){
+            return tab.isDisplayed();
+        } catch (NoSuchElementException e) {
             return false;
         }
     }

@@ -1,20 +1,24 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.controls.Label;
+import com.nhantran.utils.controls.Link;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 
 public class HomePage extends BasePage {
-    private By welcomeUserMessage = By.xpath("//div[@id='banner']//strong");
-    private By title = By.xpath("//h1");
+    private Label welcomeUserMessage = new Label(By.xpath("//div[@id='banner']//strong"));
+    private Label title = new Label(By.xpath("//h1"));
+    private Link createAccountHyperlink = new Link(By.xpath("//a[text()='create an account']"));
 
-    public Boolean checkWelcomeUserMessageDisplay() {
-        return SeleniumActions.findElement(welcomeUserMessage).isDisplayed();
+    public boolean isWelcomeUserMessageDisplayed() {
+        return welcomeUserMessage.isDisplayed();
     }
 
-    public boolean checkHomePageTitleDisplay() {
-        return SeleniumActions.findElement(title).isDisplayed();
+    public boolean isHomePageTitleDisplayed() {
+        return title.isDisplayed();
     }
 
+    public void goToRegisterPage() {
+        createAccountHyperlink.click();
+    }
 
 }

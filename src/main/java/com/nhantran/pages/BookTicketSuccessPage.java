@@ -1,45 +1,51 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.DriverManager;
-import com.nhantran.utils.SeleniumActions;
+import com.nhantran.utils.controls.Label;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-public class BookTicketSuccessPage extends BasePage{
+public class BookTicketSuccessPage extends BasePage {
 
-    private String bookedTicketTableCell = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
-    private By headerBookingSuccessfully = By.xpath("//h1");
-    private By ticketInfoDepartStation = By.xpath(String.format(bookedTicketTableCell, "Depart Station"));
-    private By ticketInfoArrivalStation = By.xpath(String.format(bookedTicketTableCell, "Arrive Station"));
-    private By ticketInfoSeatType = By.xpath(String.format(bookedTicketTableCell, "Seat Type"));
-    private By ticketInfoDepartDate = By.xpath(String.format(bookedTicketTableCell, "Depart Date"));
-    private By ticketInfoAmount = By.xpath(String.format(bookedTicketTableCell, "Amount"));
+    private String dynCellBookedTicketTable = "//td[count(//tr/th[text()='%s']/preceding-sibling::th)+1]";
+    private String dynHeaderBookingSuccessfully = "//h1[text()='%s']";
+    private By lblTicketDepartStation = By.xpath(String.format(dynCellBookedTicketTable, "Depart Station"));
+    private By lblTicketArrivalStation = By.xpath(String.format(dynCellBookedTicketTable, "Arrive Station"));
+    private By lblTicketSeatType = By.xpath(String.format(dynCellBookedTicketTable, "Seat Type"));
+    private By lblTicketDepartDate = By.xpath(String.format(dynCellBookedTicketTable, "Depart Date"));
+    private By lblTicketAmount = By.xpath(String.format(dynCellBookedTicketTable, "Amount"));
+    private By lblTicketTotalPrice = By.xpath(String.format(dynCellBookedTicketTable, "Total Price"));
 
-    public String getSuccessfulMessage() {
-        return this.getInformation(headerBookingSuccessfully);
+    public boolean isSuccessfulMessageDisplayed(String message) {
+        Label successfulMessage = new Label(By.xpath(String.format(dynHeaderBookingSuccessfully, message)));
+        return successfulMessage.isDisplayed();
     }
 
     public String getDepartStation() {
-        return this.getInformation(ticketInfoDepartStation);
+        Label tkDepartStation = new Label(lblTicketDepartStation);
+        return tkDepartStation.getText();
     }
 
     public String getArrivalStation() {
-        return this.getInformation(ticketInfoArrivalStation);
+        Label tkArrivalStation = new Label(lblTicketArrivalStation);
+        return tkArrivalStation.getText();
     }
 
     public String getSeatType() {
-        return this.getInformation(ticketInfoSeatType);
+        Label tkSeatType = new Label(lblTicketSeatType);
+        return tkSeatType.getText();
     }
 
     public String getDepartDate() {
-        return this.getInformation(ticketInfoDepartDate);
+        Label tkDepartDate = new Label(lblTicketDepartDate);
+        return tkDepartDate.getText();
     }
 
-    public String getTicketAmount() {
-        return this.getInformation(ticketInfoAmount);
+    public Integer getTicketAmount() {
+        Label tkAmount = new Label(lblTicketAmount);
+        return Integer.parseInt(tkAmount.getText());
     }
 
-    private String getInformation(By element){
-        return SeleniumActions.getElementText(element);
+    public Integer getTicketTotalPrice() {
+        Label tkAmount = new Label(lblTicketTotalPrice);
+        return Integer.parseInt(tkAmount.getText());
     }
 }
