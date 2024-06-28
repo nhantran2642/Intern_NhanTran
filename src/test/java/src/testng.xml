@@ -5,6 +5,7 @@
     <listeners>
         <listener class-name="com.nhantran.listeners.TestListener"></listener>
     </listeners>
+
     <test name="Testing">
         <parameter name="browser" value="chrome"/>
         <classes>
