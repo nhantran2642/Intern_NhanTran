@@ -4,7 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.nhantran.utils.DriverManager;
+import com.nhantran.utils.drivers.DriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -27,12 +27,12 @@ public class ExtentTestManager {
     }
 
     public static void addScreenshot(String message) {
-        String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.driver).getScreenshotAs(OutputType.BASE64);
+        String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
         getTest().log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
     }
 
     public static void addScreenshot(Status status, String message) {
-        String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.driver).getScreenshotAs(OutputType.BASE64);
+        String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
         getTest().log(status, message, MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
     }
 

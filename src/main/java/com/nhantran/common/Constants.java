@@ -4,6 +4,7 @@ public class Constants {
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String REPORT_FILE_PATH = PROJECT_PATH + "/reports/";
     public static final String ACCOUNT_JSON_FILE_PATH = PROJECT_PATH + "/src/main/resources/userdata.json";
+    public static final String CONFIG_FILE_PATH = PROJECT_PATH + "/src/main/java/com/nhantran/config/config.properties";
     public static final String RAILWAY_URL = "http://saferailway.somee.com/";
     public static final String TEMPORARY_MAIL_URL = "https://www.guerrillamail.com";
     public static final String NODE_URL = "http://localhost:4444/wd/hub";

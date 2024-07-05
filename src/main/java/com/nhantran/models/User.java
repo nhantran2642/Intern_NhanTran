@@ -1,8 +1,6 @@
 package com.nhantran.models;
 
-import com.nhantran.common.Constants;
-import com.nhantran.utils.JsonFileReader;
-import org.json.simple.JSONArray;
+import com.nhantran.utils.file_readers.JsonFileReader;
 import org.json.simple.JSONObject;
 
 public class User {

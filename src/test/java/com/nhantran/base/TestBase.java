@@ -2,7 +2,7 @@ package com.nhantran.base;
 
 import com.nhantran.common.Constants;
 import com.nhantran.listeners.TestListener;
-import com.nhantran.utils.DriverManager;
+import com.nhantran.utils.drivers.DriverManager;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;

@@ -28,7 +28,7 @@ public class LoginTest extends TestBase {
         Assert.assertTrue(homePage.isWelcomeUserMessageDisplayed(), "Welcome user message does not display");
     }
 
-    @DataProvider(name = "loginData")
+    @DataProvider(name = "loginData", parallel = true)
     public Object[][] dataTestTC002AndTC003() {
         return new Object[][]{
                 {blankEmailUser, Messages.MSG_ERROR_ABOVE_LOGIN_FORM},

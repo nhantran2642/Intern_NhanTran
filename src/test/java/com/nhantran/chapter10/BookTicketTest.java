@@ -23,7 +23,7 @@ public class BookTicketTest extends TestBase {
     private BookTicketSuccessPage bookTicketSuccessPage = new BookTicketSuccessPage();
     private User validUser = User.getLoginAccountFromJsonFile("validAccount");
 
-    @DataProvider(name = "bookTicketData")
+    @DataProvider(name = "bookTicketData", parallel = true)
     public Object[][] dataTestTC012AndTC013() {
         return new Object[][]{
                 {new Ticket(DateTimeHelper.calculateNextDate(12), RailwayStations.NHA_TRANG, RailwayStations.HUE, SeatTypes.SOFT_BED_AIR_CONDITIONER, 1)},

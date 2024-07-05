@@ -9,5 +9,5 @@ IF NOT EXIST %SELENIUM_SERVER_JAR% (
 )
 
 REM Run the Selenium server
-echo Starting Selenium server...
-java -jar %SELENIUM_SERVER_JAR% node
+echo ...Starting hub...
+java -jar %SELENIUM_SERVER_JAR% hub

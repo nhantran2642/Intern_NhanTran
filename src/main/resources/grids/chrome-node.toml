@@ -1,0 +1,6 @@
+[node]
+max-sessions = 5
+host = "localhost"
+register = true
+hub = "http://localhost:4444"
+driver-implementation = "chrome"

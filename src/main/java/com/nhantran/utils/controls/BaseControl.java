@@ -1,7 +1,7 @@
 package com.nhantran.utils.controls;
 
 import com.nhantran.common.Constants;
-import com.nhantran.utils.DriverManager;
+import com.nhantran.utils.drivers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -18,11 +18,11 @@ public class BaseControl {
     }
 
     public WebElement findElement() {
-        return DriverManager.driver.findElement(this.locator);
+        return DriverManager.getDriver().findElement(this.locator);
     }
 
     public void scrollIntoView() {
-        ((JavascriptExecutor) DriverManager.driver).executeScript("arguments[0].scrollIntoView(true);", findElement());
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView(true);", findElement());
     }
 
     public String getText() {
@@ -30,7 +30,7 @@ public class BaseControl {
     }
 
     public void waitUntilElementVisible() {
-        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(Constants.DRIVER_WAIT_TIME));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constants.DRIVER_WAIT_TIME));
         wait.until(ExpectedConditions.visibilityOfElementLocated(this.locator));
     }
 
