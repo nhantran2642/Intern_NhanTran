@@ -1,6 +1,6 @@
 package com.nhantran.pages;
 
-import com.nhantran.utils.DriverManager;
+import com.nhantran.utils.drivers.DriverManager;
 import com.nhantran.utils.controls.*;
 import org.openqa.selenium.By;
 
@@ -21,7 +21,7 @@ public class ResetPasswordPage extends BasePage {
     }
 
     public boolean isChangePasswordFormDisplayed() {
-        return DriverManager.driver.findElement(formChangePassword).isDisplayed();
+        return DriverManager.getDriver().findElement(formChangePassword).isDisplayed();
     }
 
     public String getMessageAboveForm() {

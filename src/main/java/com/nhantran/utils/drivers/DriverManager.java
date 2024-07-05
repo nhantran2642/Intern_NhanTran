@@ -1,4 +1,4 @@
-package com.nhantran.utils;
+package com.nhantran.utils.drivers;
 
 import com.nhantran.common.Constants;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -19,21 +19,29 @@ import java.time.Duration;
 
 public class DriverManager {
 
-    public static WebDriver driver;
+    private static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
+
+    public static RemoteWebDriver getDriver() {
+        return driver.get();
+    }
+
+    public static void setDriver(RemoteWebDriver webDriver) {
+        driver.set(webDriver);
+    }
 
     public static void initLocalDriver(String browser) {
         switch (browser) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                setDriver(new ChromeDriver());
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
+                setDriver(new FirefoxDriver());
                 break;
             case "edge":
                 WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
+                setDriver(new EdgeDriver());
                 break;
         }
     }
@@ -47,46 +55,48 @@ public class DriverManager {
                     capability.setBrowserName("chrome");
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.merge(capability);
+                    setDriver(new RemoteWebDriver(new URL(Constants.NODE_URL), chromeOptions));
                     break;
                 case "firefox":
                     capability.setBrowserName("firefox");
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.merge(capability);
+                    setDriver(new RemoteWebDriver(new URL(Constants.NODE_URL), firefoxOptions));
                     break;
                 case "edge":
                     capability.setBrowserName("MicrosoftEdge");
                     EdgeOptions edgeOptions = new EdgeOptions();
                     edgeOptions.merge(capability);
+                    setDriver(new RemoteWebDriver(new URL(Constants.NODE_URL), edgeOptions));
                     break;
             }
-            driver = new RemoteWebDriver(new URL(Constants.NODE_URL), capability);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
     public static void navigateToTestSite(String url) {
-        driver.navigate().to(url);
+        getDriver().navigate().to(url);
     }
 
     public static void waitForPageToLoad() {
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.PAGE_LOAD_WAIT_TIME));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICITLY_WAIT_TIME));
+        getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.PAGE_LOAD_WAIT_TIME));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICITLY_WAIT_TIME));
     }
 
     public static void maximizeWindow() {
-        driver.manage().window().maximize();
+        getDriver().manage().window().maximize();
     }
 
     public static void closeDriver() {
-        if (driver != null) {
-            driver.close();
+        if (getDriver() != null) {
+            getDriver().close();
         }
     }
 
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
+        if (getDriver() != null) {
+            getDriver().quit();
         }
     }
 }
