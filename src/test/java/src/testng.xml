@@ -6,6 +6,7 @@
         <!--        <listener class-name="com.nhantran.listeners.TestListener"/>-->
         <!--        <listener class-name="com.nhantran.listeners.CustomSuiteListener"/>-->
     </listeners>
+
     <test name="Test 1">
         <parameter name="browser" value="chrome"/>
         <classes>
