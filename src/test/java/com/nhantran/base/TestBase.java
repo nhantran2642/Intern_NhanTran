@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 
-@Listeners(TestListener.class)
+//@Listeners(TestListener.class)
 public class TestBase {
 
     private void startAUT(String browser, String runMode) {
